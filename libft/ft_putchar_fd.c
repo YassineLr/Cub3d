@@ -1,20 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 03:26:36 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/17 03:27:08 by yismaail         ###   ########.fr       */
+/*   Created: 2022/10/24 19:42:53 by yismaail          #+#    #+#             */
+/*   Updated: 2022/11/02 12:50:59 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "includes/cub3d.h"
+#include "libft.h"
 
-int main (int ac, char **av)
+void	ft_putchar_fd(char c, int fd)
 {
-	t_data	*data;
+	write (fd, &c, 1);
 }
-

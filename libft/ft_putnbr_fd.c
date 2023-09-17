@@ -1,20 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 03:26:36 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/17 03:27:08 by yismaail         ###   ########.fr       */
+/*   Created: 2022/10/23 06:32:05 by yismaail          #+#    #+#             */
+/*   Updated: 2022/10/26 19:26:12 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "includes/cub3d.h"
+#include "libft.h"
 
-int main (int ac, char **av)
+void	ft_putnbr_fd(int n, int fd)
 {
-	t_data	*data;
+	if (n == -2147483648)
+		write (fd, "-2147483648", 11);
+	else if (n >= 0 && n < 10)
+	{
+		n += 48;
+		write (fd, &n, 1);
+	}
+	else if (n < 0)
+	{
+		write (fd, "-", 1);
+		n *= -1;
+		ft_putnbr_fd(n, fd);
+	}
+	else
+	{
+		ft_putnbr_fd(n / 10, fd);
+		ft_putnbr_fd(n % 10, fd);
+	}
 }
-

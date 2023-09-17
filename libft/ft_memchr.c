@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 03:26:36 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/17 03:27:08 by yismaail         ###   ########.fr       */
+/*   Created: 2022/10/10 11:49:02 by yismaail          #+#    #+#             */
+/*   Updated: 2022/11/02 12:50:30 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "includes/cub3d.h"
+#include "libft.h"
 
-int main (int ac, char **av)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	t_data	*data;
-}
+	unsigned char	*str;
+	unsigned char	symbole;
 
+	symbole = (unsigned char)c;
+	str = (unsigned char *)s;
+	while (n--)
+	{
+		if (*str == symbole)
+			return (str);
+		str++;
+	}
+	return (NULL);
+}

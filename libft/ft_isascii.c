@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_isascii.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 03:26:36 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/17 03:27:08 by yismaail         ###   ########.fr       */
+/*   Created: 2022/10/06 15:25:08 by yismaail          #+#    #+#             */
+/*   Updated: 2022/10/17 16:50:59 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "includes/cub3d.h"
+#include "libft.h"
 
-int main (int ac, char **av)
+int	ft_isascii(int c)
 {
-	t_data	*data;
+	if (c >= 0 && c <= 127)
+		return (1);
+	return (0);
 }
-

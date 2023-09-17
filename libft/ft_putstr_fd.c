@@ -1,20 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 03:26:36 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/17 03:27:08 by yismaail         ###   ########.fr       */
+/*   Created: 2022/10/23 06:13:28 by yismaail          #+#    #+#             */
+/*   Updated: 2022/10/25 04:21:33 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "includes/cub3d.h"
+#include "libft.h"
 
-int main (int ac, char **av)
+void	ft_putstr_fd(char *s, int fd)
 {
-	t_data	*data;
+	if (s)
+		write(fd, s, ft_strlen(s));
 }
-

@@ -1,20 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 03:26:36 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/17 03:27:08 by yismaail         ###   ########.fr       */
+/*   Created: 2022/10/15 09:26:52 by yismaail          #+#    #+#             */
+/*   Updated: 2022/10/25 03:58:13 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "includes/cub3d.h"
+#include "libft.h"
 
-int main (int ac, char **av)
+char	*ft_strdup(const char *s1)
 {
-	t_data	*data;
-}
+	char	*str;
 
+	str = (char *)malloc(ft_strlen(s1) + 1);
+	if (!str)
+		return (0);
+	ft_memcpy(str, s1, ft_strlen(s1) + 1);
+	return (str);
+}

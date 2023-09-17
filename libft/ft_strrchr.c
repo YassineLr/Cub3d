@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 03:26:36 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/17 03:27:08 by yismaail         ###   ########.fr       */
+/*   Created: 2022/10/08 15:17:54 by yismaail          #+#    #+#             */
+/*   Updated: 2022/10/25 23:46:05 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "includes/cub3d.h"
+#include "libft.h"
 
-int main (int ac, char **av)
+char	*ft_strrchr(const char *s, int c)
 {
-	t_data	*data;
-}
+	char	*ptr;
+	char	cast;
 
+	ptr = (char *)s + ft_strlen(s);
+	cast = (char)c;
+	while (ptr >= s)
+	{
+		if (*ptr == cast)
+			return (ptr);
+		ptr--;
+	}
+	return (NULL);
+}

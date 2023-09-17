@@ -1,20 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 03:26:36 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/17 03:27:08 by yismaail         ###   ########.fr       */
+/*   Created: 2022/10/12 23:28:38 by yismaail          #+#    #+#             */
+/*   Updated: 2022/10/29 18:43:53 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "includes/cub3d.h"
+#include "libft.h"
 
-int main (int ac, char **av)
+void	*ft_calloc(size_t count, size_t size)
 {
-	t_data	*data;
-}
+	void	*str;
 
+	if (size && count >= SIZE_MAX / size)
+		return (NULL);
+	str = malloc(count * size);
+	if (!str)
+		return (0);
+	ft_bzero(str, count * size);
+	return (str);
+}

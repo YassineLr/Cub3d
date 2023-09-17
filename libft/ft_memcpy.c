@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 03:26:36 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/17 03:27:08 by yismaail         ###   ########.fr       */
+/*   Created: 2022/10/09 13:17:45 by yismaail          #+#    #+#             */
+/*   Updated: 2022/11/01 14:50:22 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "includes/cub3d.h"
+#include "libft.h"
 
-int main (int ac, char **av)
+void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	t_data	*data;
-}
+	unsigned char	*d;
+	unsigned char	*s;
 
+	s = (unsigned char *)src;
+	d = (unsigned char *)dst;
+	if (d == NULL && s == NULL)
+		return (NULL);
+	if (dst == src)
+		return (dst);
+	while (n--)
+	{
+		*d++ = *s++;
+	}
+	return (dst);
+}
