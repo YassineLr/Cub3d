@@ -1,38 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/18 05:02:59 by yismaail         ###   ########.fr       */
+/*   Created: 2023/09/18 03:43:32 by yismaail          #+#    #+#             */
+/*   Updated: 2023/09/18 05:08:18 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-#define CUB3D_H
+#include "../includes/cub3d.h"
 
-#include <unistd.h>
-#include <stdlib.h>
-#include "../libft/libft.h"
-
-typedef struct s_palyer
+static void print_message(const char *str, int code)
 {
-	int i;
-	
-}			t_player;
+	if (code)
+		ft_putstr_fd("ERROR", 2);
+	if (str)
+		ft_putendl_fd(str, 2);
+	if (!code && !str)
+		ft_putendl_fd("thella", 1);
+}
 
-typedef struct s_data
+void	close_fds(int min, int max)
 {
-	char	*path;
-	char	**map;
-	int		map_h;
-	int		map_w;
-	
-}			t_data;
+	while (min <= max)
+		close(min++);
+}
 
-void init_game(t_data *data, int ac, char **av);
-void	ft_exit(t_data *data, const char *str, int code);
-
-#endif
+void	ft_exit(t_data *data, const char *str, int code)
+{
+	print_message(str, code);
+	close_fds(0, 1023);
+	exit(code);
+}
