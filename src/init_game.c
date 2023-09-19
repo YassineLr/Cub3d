@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 03:03:45 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/18 05:22:09 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/09/19 05:27:22 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,26 @@ static void get_file_name(char *name, t_data *data)
 static void	init_data(t_data *data)
 {
 	ft_bzero(data, sizeof(t_data));
+	ft_bzero(&data->textures, sizeof(t_texture));
 }
+
+// static void	affich_data(t_data *data)
+// {
+// 	if (data)
+// 	{
+// 		if (data->path)
+// 		{
+// 			printf("path")
+// 		}
+// 	}
+// }
+
 
 void init_game(t_data *data, int ac, char **av)
 {
 	init_data(data);
 	check_args(ac, data);
 	get_file_name(av[1], data);
+	get_data(data);
+	// affich_data(data);
 }

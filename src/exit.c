@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 03:43:32 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/18 05:08:18 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/09/19 03:45:03 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ static void print_message(const char *str, int code)
 		ft_putendl_fd(str, 2);
 	if (!code && !str)
 		ft_putendl_fd("thella", 1);
+}
+
+void	free_ptr(char **str)
+{
+	free(*str);
+	*str = NULL;
 }
 
 void	close_fds(int min, int max)

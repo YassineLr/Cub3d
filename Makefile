@@ -6,7 +6,7 @@
 #    By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/26 15:19:11 by yismaail          #+#    #+#              #
-#    Updated: 2023/09/18 03:06:15 by yismaail         ###   ########.fr        #
+#    Updated: 2023/09/19 05:28:55 by yismaail         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME		=	cub3d
 CC			=	cc
 CFLAGS		=	-Werror -Wextra -Wall #-fsanitize=address -g
 RM			=	rm -rf
-SRCS		=	main.c src/init_game.c
+SRCS		=	main.c src/init_game.c src/get_data.c src/exit.c
 				
 OBJS		= ${SRCS:.c=.o}
 
