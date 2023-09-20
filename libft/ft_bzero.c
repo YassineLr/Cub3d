@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 14:56:09 by yismaail          #+#    #+#             */
-/*   Updated: 2022/10/25 23:43:50 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/09/20 03:57:00 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,9 @@
 
 void	ft_bzero(void *s, size_t n)
 {
-	ft_memset(s, '\0', n);
+	char	*s_cpy;
+
+	s_cpy = s;
+	while (n--)
+		*s_cpy++ = 0;
 }

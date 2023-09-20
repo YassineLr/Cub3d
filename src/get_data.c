@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 06:56:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/19 04:33:18 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/09/19 19:45:09 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ static int	set_data(char *line, t_data *data)
 		color = get_color(&data->colors.celling, line);
 	else if (!ft_strncmp(line, "F ", 2) && !s)
 		color = get_color(&data->colors.floor, line);
-	else if (ft_strchr("NWES10", line[0]) || s)
-		s = get_map(data, line);
+	// else if (ft_strchr("NWES10", line[0]) || s)
+	// 	s = get_map(data, line);
 	return (color);
 }
 
@@ -79,7 +79,7 @@ void	get_data(t_data *data)
 	{
 		err += set_data(line, data);
 		free_ptr(&line);
-		line = get_next_line(fd)
+		line = get_next_line(fd);
 	}
 	if (err < 2)
 	{
