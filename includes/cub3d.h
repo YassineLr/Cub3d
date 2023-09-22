@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/22 08:18:45 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:14:01 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdio.h>
 # include <math.h>
 # include "../libft/libft.h"
+# include "minilibx-linux/mlx.h"
 
 # define WIN_NAME "Cub3d"
 # define WIN_HEIGHT 600
@@ -71,6 +72,17 @@ typedef struct s_data
 	t_color		colors;
 	t_player	player;
 }			t_data;
+
+typedef struct	s_mlx 
+{
+	void	*mlx_ptr;
+	void	*img;
+	void	*win;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}		t_mlx;
 
 void init_game(t_data *data, int ac, char **av);
 void	ft_exit(t_data *data, const char *str, int code);
