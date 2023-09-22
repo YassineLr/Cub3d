@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 06:56:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/20 23:37:53 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/09/22 11:53:54 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@ static int	get_color(int *color, char *line)
 	c.len = ft_strchr (line + c.start, '\0') - line - c.start;
 	c.temp[2] = ft_substr (line, c.start, c.len);
 	*color |= ((unsigned char) ft_atoi (c.temp[2]));
+	if (!(ft_atoi(c.temp[0]) >= 0 && ft_atoi(c.temp[0]) <= 255)
+		|| !(ft_atoi(c.temp[1]) >= 0 && ft_atoi(c.temp[1]) <= 255)
+		|| !(ft_atoi(c.temp[2]) >= 0 && ft_atoi(c.temp[2]) <= 255))
+			c.ret = -1;
 	if (!c.temp[0] || !c.temp[1] || !c.temp[2])
 		c.ret = -1;
 	free_ptr (&c.temp[0]);
@@ -45,6 +49,7 @@ static int	set_data(char *line, t_data *data)
 	int			color;
 
 	i = 0;
+	color = 0;
 	while (line[i] && line[i] != '\n')
 		i++;
 	if (!ft_strncmp(line, "NO ", 3) && !s)
