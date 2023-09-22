@@ -6,13 +6,13 @@
 #    By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/26 15:19:11 by yismaail          #+#    #+#              #
-#    Updated: 2023/09/22 12:15:27 by ylarhris         ###   ########.fr        #
+#    Updated: 2023/09/22 12:20:27 by ylarhris         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3d
 CC			=	cc
-CFLAGS		=	-Imlx_linux -Werror -Wextra -Wall  #-fsanitize=address -g
+CFLAGS		=	-Imlx_linux #-Werror -Wextra -Wall  #-fsanitize=address -g
 RM			=	rm -rf
 SRCS		=	main.c src/parsing/init_game.c src/parsing/get_data.c src/parsing/exit.c src/parsing/get_map.c src/parsing/check_map.c \
 				src/rendering/initializer.c

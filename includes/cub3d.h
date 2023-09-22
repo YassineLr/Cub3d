@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/22 12:14:01 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:24:19 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "minilibx-linux/mlx.h"
 
 # define WIN_NAME "Cub3d"
-# define WIN_HEIGHT 600
-# define WIN_WIDTH 960
+# define WIN_HEIGHT 1920
+# define WIN_WIDTH 1080
 # define PI 3.1415
 
 typedef struct s_palyer
@@ -95,5 +95,7 @@ int get_map(t_data *data, char *line);
 void	get_format(char ***map, size_t height, size_t width);
 void	get_player_info(t_data *data);
 void	check_map(t_data *data);
+
+t_mlx    *mlx_initializer(void);
 
 #endif
