@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 03:03:45 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/22 12:11:22 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/09/22 12:36:21 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,6 @@ void	init_game(t_data *data, int ac, char **av)
 	if (!data->map || !(int)data->player.x || !data->player.y)
 		ft_exit(data, "invalide information", 1);
 	check_map(data);
+	data->mlx = mlx_initializer();
 	// affich_info(data);
 }

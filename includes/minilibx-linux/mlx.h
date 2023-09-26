@@ -26,7 +26,6 @@
 ** de ce type.
 */
 
-
 #ifndef MLX_H
 
 #define	MLX_H
@@ -135,5 +134,7 @@ int	mlx_mouse_hide(void *mlx_ptr, void *win_ptr);
 int	mlx_mouse_show(void *mlx_ptr, void *win_ptr);
 
 int	mlx_get_screen_size(void *mlx_ptr, int *sizex, int *sizey);
+
+
 
 #endif /* MLX_H */

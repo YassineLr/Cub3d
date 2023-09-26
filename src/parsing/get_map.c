@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 23:28:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/22 12:11:18 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/09/26 01:30:23 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	get_direction(t_data *data, size_t x, size_t y)
 	data -> player.y = y + 0.5;
 	data -> player.col_x = x * (WIN_WIDTH / data->map_w);
 	data -> player.col_y = y * (WIN_HEIGHT / data->map_h);
-	data -> player.direction = data -> map[y][x];
+	data -> player.walkdirection = data -> map[y][x];
 	if (data -> map[y][x] == 'N')
 		data -> player.ang = PI / 2;
 	if (data -> map[y][x] == 'E')

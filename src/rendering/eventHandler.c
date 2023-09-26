@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   eventHandler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 03:26:36 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/26 02:05:45 by ylarhris         ###   ########.fr       */
+/*   Created: 2023/09/26 01:46:28 by ylarhris          #+#    #+#             */
+/*   Updated: 2023/09/26 03:47:05 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+# include "../../includes/cub3d.h"
 
-int main (int ac, char **av)
+int	eventlistener(int keycode, t_data *data)
 {
-	t_data	data;
-	init_game(&data, ac, av);
-	render2dmap(&data);
-	mlx_key_hook(data.mlx->win, eventlistener, &data.mlx);
-	// run_game(data);
-	
-	mlx_loop(data.mlx->mlx_ptr);
+	if(keycode == ESC)
+		exit(1);
+    // else if(keycode == KEYUP)
+    // {
+    //     data->player.
+    // }
+    
+	// printf("Hello from key_hook!\n");
+	return (0);
 }
