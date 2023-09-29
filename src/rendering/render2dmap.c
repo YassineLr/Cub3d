@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/09/26 01:29:40 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/09/29 06:46:59 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,23 @@ void    drawrectangle(t_mlx *mlx, t_cordinate point, int color)
 
 void    initplayer(t_data *data)
 {
-    data->player.ang = 0;
-    data->player.x = WIN_HEIGHT/2;
-    data->player.y = WIN_WIDTH/2;
+    data->player.x = TILE_SIZE * data->map_w/2;
+    data->player.y = TILE_SIZE * data->map_h/2;
+    // data->player.ang = PI/2;
+    data->player.turndirection = 0;
     data->player.walkdirection = 0;
-    data->player.rotationspeed = 0;
     data->player.movespeed = 2.0;
     data->player.rotationspeed = 2 * (PI / 180);
 }
 
-void renderplayer(t_data *data, int radius)
+int renderplayer(t_data *data, int radius)
 {
     int         i = 0;
     int         j = 0;
     t_cordinate center;
 
-    center.x = TILE_SIZE * data->map_h / 2;
-    center.y = TILE_SIZE * data->map_w / 2;
+    center.x = data->player.x;
+    center.y = data->player.y;
     while (i < TILE_SIZE * data->map_h)
     {
         j = 0;
@@ -63,7 +63,14 @@ void renderplayer(t_data *data, int radius)
         }
         i++;
     }
+    return (0);
 }
+
+// void    drawline(t_data *data, t_cordinate start, t_cordinate end)
+// {
+//     int i;
+
+// }
 
 void    draw2dmap(t_data *data)
 {
@@ -78,8 +85,9 @@ void    draw2dmap(t_data *data)
         j = 0;
         while (j < data->map_w)
         {
-            point.x = i * TILE_SIZE;
-            point.y = j * TILE_SIZE;
+            printf("%c\t", data->map[i][j]);
+            point.x = j * TILE_SIZE;
+            point.y = i * TILE_SIZE;
             if (ft_strncmp(data->map[i] + j, "1",1))
                 color = 0x000000;
             else
@@ -87,21 +95,29 @@ void    draw2dmap(t_data *data)
             drawrectangle(data->mlx, point, color);
             j++;
         }
+        printf("\n");
         i++;
     }
     // mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win, data->mlx->img, 0, 0);
 }
 
-// void    playermovement(t_data *data)
-// {
-//     data->player.x = WIN_HEIGHT/2;
-//     data->player.y = WIN_WIDTH/2;
-//     data-
-// }
+void    playermovement(t_data *data)
+{
+    float movestep;
+
+    movestep = data->player.walkdirection * data->player.movespeed;
+    data->player.x = data->player.dx * movestep;
+    data->player.y = data->player.dy * movestep;
+}
 
 void render2dmap(t_data *data)
 {
+    data->mlx->img = mlx_new_image(data->mlx->mlx_ptr, WIN_HEIGHT, WIN_WIDTH);
+	data->mlx->addr = mlx_get_data_addr(data->mlx->img, &data->mlx->bits_per_pixel, &data->mlx->line_length, &data->mlx->endian);
     initplayer(data);
     draw2dmap(data);
     renderplayer(data, 10);
+    playermovement(data);
+    mlx_destroy_image(data->mlx->mlx_ptr, data->mlx->img);
+    // mlx_loop_hook(data->mlx, renderplayer, data);
 }

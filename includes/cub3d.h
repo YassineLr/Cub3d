@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/26 02:06:09 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/09/29 04:38:44 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@
 # define TILE_SIZE 64
 # define KEYDOWN 65364
 # define KEYUP 65362
+# define RIGHT_ARROW 65363
+# define LEFT_ARROW 65361
 # define ESC 65307
 
 
@@ -41,6 +43,7 @@ typedef struct s_palyer
 	float	dy;
 	float	ang;
 	int		walkdirection;
+	int		turndirection;
 	float	rotationdirection;
 	float	movespeed;
 	float	rotationspeed;
@@ -116,6 +119,6 @@ void	check_map(t_data *data);
 t_mlx    *mlx_initializer(void);
 void    draw2dmap(t_data *data);
 void 	render2dmap(t_data *data);
-int		eventlistener(int keycode, t_data *data);
+int		keypressed(int keycode, t_data *data);
 
 #endif
