@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 23:28:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/26 01:30:23 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/04 10:20:19 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static void	get_direction(t_data *data, size_t x, size_t y)
 		data -> player.ang = PI;
 	if (data -> map[y][x] == 'S')
 		data -> player.ang = 3 * PI / 2;
-	data -> player.dx = cos(data -> player.ang);
-	data -> player.dy = sin(data -> player.ang);
 }
 
 void	get_player_info(t_data *data)
@@ -64,8 +62,11 @@ void	get_player_info(t_data *data)
 		x = 0;
 		while (data->map[y] && data->map[y][x])
 		{
-			if (ft_strchr("NSEW01", data->map[y][x]))
+			if (ft_strchr("NSEW", data->map[y][x]))
+			{
+				
 				get_direction(data, x, y);
+			}
 			x++;
 		}
 		y++;

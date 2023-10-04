@@ -1,28 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/17 03:26:36 by yismaail          #+#    #+#             */
-/*   Updated: 2023/10/02 10:39:32 by ylarhris         ###   ########.fr       */
+/*   Created: 2023/10/04 11:11:16 by ylarhris          #+#    #+#             */
+/*   Updated: 2023/10/04 13:03:27 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
-
-
-int main (int ac, char **av)
+void    cast_all_rays(t_data *data)
 {
-	t_data	data;
-	init_game(&data, ac, av);
-	initplayer(&data);
-	// printf("x = %f\t y = %f\n", data.player.x, data.player.y);
-	
-	mlx_loop_hook(data.mlx->mlx_ptr,render2dmap, &data);
-	mlx_hook(data.mlx->win, 02, (1L << 0), keypressed, &data);
-	mlx_hook(data.mlx->win, 03, (1L << 1), keyreleased, &data);
-	mlx_loop(data.mlx->mlx_ptr);
+    int     rays_counter;
+    float   ray_angle;
+    int     i;
+
+    i = 0;
+    rays_counter = 0;
+    ray_angle = data->player.angle -(FOV/2);
+    while (i < NUM_RAYS)
+    {
+         
+    }
+    
 }

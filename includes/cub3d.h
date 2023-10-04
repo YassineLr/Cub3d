@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/29 04:38:44 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/04 13:02:15 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 # include "minilibx-linux/mlx.h"
 
 # define WIN_NAME "Cub3d"
-# define WIN_HEIGHT 1920
-# define WIN_WIDTH 1080
+# define WIN_HEIGHT 1400
+# define WIN_WIDTH 920
 # define PI 3.1415
 # define TILE_SIZE 64
 # define KEYDOWN 65364
@@ -31,7 +31,9 @@
 # define RIGHT_ARROW 65363
 # define LEFT_ARROW 65361
 # define ESC 65307
-
+# define FOV 60 * PI / 180
+# define WALL_STRIP_WIDTH 1
+# define NUM_RAYS WIN_WIDTH
 
 typedef struct s_palyer
 {
@@ -47,6 +49,7 @@ typedef struct s_palyer
 	float	rotationdirection;
 	float	movespeed;
 	float	rotationspeed;
+	int		to_do;
 }			t_player;
 
 typedef struct s_get_color
@@ -103,6 +106,12 @@ typedef struct s_coordinate
 	int y;
 }			t_cordinate;
 
+typedef struct s_ray
+{
+	float ray_angle;
+	
+}			t_ray;
+
 
 void 	init_game(t_data *data, int ac, char **av);
 void	ft_exit(t_data *data, const char *str, int code);
@@ -118,7 +127,12 @@ void	check_map(t_data *data);
 
 t_mlx    *mlx_initializer(void);
 void    draw2dmap(t_data *data);
-void 	render2dmap(t_data *data);
+int 	render2dmap(t_data *data);
 int		keypressed(int keycode, t_data *data);
+void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
+void    playermovement(t_data *data);
+void    initplayer(t_data *data);
+int 	keyreleased(int keycode, t_data *data);
+
 
 #endif
