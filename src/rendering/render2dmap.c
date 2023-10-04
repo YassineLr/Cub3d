@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/04 10:19:16 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:53:12 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
 	char	*dst;
 
+    if(x < 0 || x > WIN_HEIGHT || y < 0 || y > WIN_WIDTH)
+        return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
@@ -204,6 +206,9 @@ int render2dmap(t_data *data)
     draw2dmap(data);
     playermovement(data);
     renderplayer(data, 5);
+    
+    cast_all_rays(data);
+    render_rays(data);
     // plotLine(data, data->player.x,data->player.y , 200,200, 0xFF0000);
     // printf("%f\n");
     // draw_line(data->mlx, data->player.x, data->player.y, 20,data->player.ang,0x070707);

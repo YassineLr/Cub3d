@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/10/04 13:02:15 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/04 14:44:03 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,15 @@
 # define RIGHT_ARROW 65363
 # define LEFT_ARROW 65361
 # define ESC 65307
-# define FOV 60 * PI / 180
+# define FOV 60*PI/180
 # define WALL_STRIP_WIDTH 1
-# define NUM_RAYS WIN_WIDTH
+# define NUM_RAYS 920
 
+typedef struct s_ray
+{
+	float ray_angle;
+	
+}			t_ray;
 typedef struct s_palyer
 {
 	float	x;
@@ -50,6 +55,7 @@ typedef struct s_palyer
 	float	movespeed;
 	float	rotationspeed;
 	int		to_do;
+	t_ray	*rays;
 }			t_player;
 
 typedef struct s_get_color
@@ -106,11 +112,6 @@ typedef struct s_coordinate
 	int y;
 }			t_cordinate;
 
-typedef struct s_ray
-{
-	float ray_angle;
-	
-}			t_ray;
 
 
 void 	init_game(t_data *data, int ac, char **av);
@@ -133,6 +134,11 @@ void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 void    playermovement(t_data *data);
 void    initplayer(t_data *data);
 int 	keyreleased(int keycode, t_data *data);
+void    cast_all_rays(t_data *data);
+void plotLine(t_data *cub3D, int x0, int y0, int x1, int y1, int color);
+void render_rays(t_data *data);
+float angles(float angle);
+
 
 
 #endif
