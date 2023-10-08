@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/04 14:53:12 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/08 10:06:56 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void    initplayer(t_data *data)
     data->player.y *= TILE_SIZE ;
     data->player.turndirection = 0;
     data->player.walkdirection = 0;
-    data->player.movespeed = 1.5; 
+    data->player.movespeed = 2.0;
     data->player.rotationspeed = 2 * (PI / 180);
     data->player.to_do = 0;
 }
@@ -154,14 +154,16 @@ void    draw2dmap(t_data *data)
     }
 }
 
-float angles(float angle)
+float angles_normalizer(float angle)
 {
-    if(angle < 0)
-        angle += 2* M_PI;
-    else if(angle > 2*M_PI)
-        angle -= 2 * M_PI;
-    return (angle);
+    double result;
+
+    result = fmod((double)angle, 2 * PI);
+    if (result < 0)
+        result += 2 * PI;
+    return ((float)result);
 }
+
 int has_wall_at(t_data *data, float x, float y)
 {
     int x_index;
@@ -172,7 +174,7 @@ int has_wall_at(t_data *data, float x, float y)
 		return (1);
     x_index = x/TILE_SIZE;
     y_index = y/TILE_SIZE;
-    if(ft_strncmp(data->map[y_index]+ x_index, "1", 1))
+    if(ft_strncmp(data->map[y_index] + x_index, "1", 1))
         return (0);
     return 1;
 }
@@ -185,7 +187,7 @@ void    playermovement(t_data *data)
     
     movestep = data->player.walkdirection * data->player.movespeed;
     data->player.ang += data->player.turndirection * data->player.rotationspeed;
-    data->player.ang = angles(data->player.ang);
+    data->player.ang = angles_normalizer(data->player.ang);
     new_x = data->player.x + cos (data->player.ang) * movestep;
     new_y = data->player.y + sin (data->player.ang) * movestep;
     if(!has_wall_at(data, new_x, new_y))
@@ -206,14 +208,13 @@ int render2dmap(t_data *data)
     draw2dmap(data);
     playermovement(data);
     renderplayer(data, 5);
-    
     cast_all_rays(data);
-    render_rays(data);
-    // plotLine(data, data->player.x,data->player.y , 200,200, 0xFF0000);
-    // printf("%f\n");
-    // draw_line(data->mlx, data->player.x, data->player.y, 20,data->player.ang,0x070707);
     mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win, data->mlx->img, 0,0);
     mlx_destroy_image(data->mlx->mlx_ptr, data->mlx->img);
     return (1);
 }
 
+// double distance()
+// {
+//     return sqrt(pow((),2));
+// }

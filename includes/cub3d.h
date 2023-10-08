@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/10/04 14:44:03 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/08 09:59:46 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <math.h>
 # include "../libft/libft.h"
 # include "minilibx-linux/mlx.h"
+# include <stdbool.h>
 
 # define WIN_NAME "Cub3d"
 # define WIN_HEIGHT 1400
@@ -33,13 +34,26 @@
 # define ESC 65307
 # define FOV 60*PI/180
 # define WALL_STRIP_WIDTH 1
-# define NUM_RAYS 920
+# define NUM_RAYS 1880
 
 typedef struct s_ray
 {
 	float ray_angle;
-	
+	float wall_hit_x;
+	float wall_hit_y;
+	float x_distance;
+	float y_distance;
+	float y_step_h;
+    float x_step_h;
+	float y_step_v;
+    float x_step_v;
+    float y_intercept_h;
+    float x_intercept_h;
+	float y_intercept_v;
+    float x_intercept_v;
 }			t_ray;
+
+
 typedef struct s_palyer
 {
 	float	x;
@@ -135,9 +149,21 @@ void    playermovement(t_data *data);
 void    initplayer(t_data *data);
 int 	keyreleased(int keycode, t_data *data);
 void    cast_all_rays(t_data *data);
-void plotLine(t_data *cub3D, int x0, int y0, int x1, int y1, int color);
-void render_rays(t_data *data);
-float angles(float angle);
+void 	plotLine(t_data *cub3D, int x0, int y0, int x1, int y1, int color);
+void 	render_rays(t_data *data);
+float 	angles_normalizer(float angle);
+int     ray_direction(t_ray *ray);
+void cast_ray(t_ray *ray, t_data *data);
+void x_intersections(t_ray *ray, t_data *data);
+void y_intersections(t_ray *ray, t_data *data);
+// void 	y_intersections(t_ray *ray, t_player *player);
+void 	ver_hor_intersections(t_ray *ray, t_player *player);
+void 	ver_intersections(t_ray *ray, t_player *player);
+void 	hor_intersections(t_ray *ray, t_player *player);
+int 	has_wall_at(t_data *data, float x, float y);
+void 	distance_to_wall(t_ray *ray, t_data *data);
+
+
 
 
 
