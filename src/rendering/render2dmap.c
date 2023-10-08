@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/08 10:06:56 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/08 12:14:50 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,9 @@ int has_wall_at(t_data *data, float x, float y)
 		return (1);
     x_index = x/TILE_SIZE;
     y_index = y/TILE_SIZE;
-    if(ft_strncmp(data->map[y_index] + x_index, "1", 1))
-        return (0);
+    if(data->map[y_index] && data->map[y_index] + x_index)
+        if(ft_strncmp(data->map[y_index] + x_index, "1", 1))
+            return (0);
     return 1;
 }
 

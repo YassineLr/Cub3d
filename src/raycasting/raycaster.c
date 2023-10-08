@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:11:16 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/08 10:11:19 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/08 10:15:39 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,18 +78,18 @@ void cast_ray(t_ray *ray, t_data *data)
 
 void x_intersections(t_ray *ray, t_data *data)
 {
-    double my_tang = -1/tan(ray->ray_angle);
+    double arc_tan = -1/tan(ray->ray_angle);
     
     if(ray->ray_angle > M_PI)
     {
         ray->y_intercept_h = (int)(data->player.y / TILE_SIZE) * TILE_SIZE - 1; 
-        ray->x_intercept_h = (data->player.y - ray->y_intercept_h)*my_tang +data->player.x;
+        ray->x_intercept_h = (data->player.y - ray->y_intercept_h)*arc_tan +data->player.x;
         ray->y_step_h = -TILE_SIZE;
     }
     else if(ray->ray_angle < M_PI)
     {
         ray->y_intercept_h = (int)(data->player.y / TILE_SIZE) * TILE_SIZE + TILE_SIZE; 
-        ray->x_intercept_h = (data->player.y - ray->y_intercept_h) * my_tang + data->player.x;
+        ray->x_intercept_h = (data->player.y - ray->y_intercept_h) * arc_tan + data->player.x;
         ray->y_step_h = TILE_SIZE;
     }
     else if (ray->ray_angle == 0 || ray->ray_angle == M_PI)
@@ -97,9 +97,7 @@ void x_intersections(t_ray *ray, t_data *data)
         ray->y_intercept_h = data->player.y;
         ray->x_intercept_h = data->player.x;
     }
-    ray->x_step_h = -ray->y_step_h * my_tang;
-    // next_x = ray->x_intercept_h;
-    // next_y = ray->y_intercept_h;
+    ray->x_step_h = -ray->y_step_h * arc_tan;;
     while (ray->x_intercept_h >= 0 &&  ray->x_intercept_h <= data->map_w * TILE_SIZE && ray->y_intercept_h >= 0 && ray->y_intercept_h <= data->map_h * TILE_SIZE)
     {
         if(has_wall_at(data ,ray->x_intercept_h, ray->y_intercept_h))
@@ -110,25 +108,22 @@ void x_intersections(t_ray *ray, t_data *data)
             ray->y_intercept_h += ray->y_step_h;
         }
     }
-    // plotLine(data,data->player.x, data->player.y, ray->x_intercept_h, ray->y_intercept_h, 0x00FF00);    
-    // ray->wall_hit_x_h =  ray->x_intercept_h;
-    // ray->wall_hit_y_h = ray->y_intercept_h;
 }
 
 void    y_intersections(t_ray *ray, t_data *data)
 {
-    double my_tang = -tan(ray->ray_angle);
+    double arc_tan = -tan(ray->ray_angle);
     
     if(ray->ray_angle > M_PI/2 && ray->ray_angle < 3 * M_PI/2)
     {
         ray->x_intercept_v = (int)(data->player.x / TILE_SIZE) * TILE_SIZE - 1; 
-        ray->y_intercept_v = (data->player.x - ray->x_intercept_v)*my_tang +data->player.y;
+        ray->y_intercept_v = (data->player.x - ray->x_intercept_v)*arc_tan +data->player.y;
         ray->x_step_v = -TILE_SIZE;
     }
     else if(ray->ray_angle < M_PI/2 || ray->ray_angle > 3 * M_PI/2)
     {
         ray->x_intercept_v = (int)(data->player.x / TILE_SIZE) * TILE_SIZE + TILE_SIZE; 
-        ray->y_intercept_v = (data->player.x - ray->x_intercept_v) * my_tang + data->player.y;
+        ray->y_intercept_v = (data->player.x - ray->x_intercept_v) * arc_tan + data->player.y;
         ray->x_step_v = TILE_SIZE;
     }
     else if (ray->ray_angle == M_PI/2 || ray->ray_angle == 3 * M_PI/2)
@@ -136,7 +131,7 @@ void    y_intersections(t_ray *ray, t_data *data)
         ray->x_intercept_v = data->player.x;
         ray->y_intercept_v = data->player.y;
     }
-    ray->y_step_v = -ray->x_step_v * my_tang;
+    ray->y_step_v = -ray->x_step_v * arc_tan;
     while (ray->x_intercept_v >= 0 &&  ray->x_intercept_v <= data->map_w * TILE_SIZE && ray->y_intercept_v >= 0 && ray->y_intercept_v <= data->map_h * TILE_SIZE)
     {
         if(has_wall_at(data ,ray->x_intercept_v, ray->y_intercept_v))
