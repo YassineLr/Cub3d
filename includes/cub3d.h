@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/10/08 09:59:46 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/18 17:30:49 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,30 +27,40 @@
 # define WIN_WIDTH 920
 # define PI 3.1415
 # define TILE_SIZE 64
-# define KEYDOWN 65364
-# define KEYUP 65362
-# define RIGHT_ARROW 65363
-# define LEFT_ARROW 65361
-# define ESC 65307
+# define KEYDOWN 125
+# define KEYUP 126
+# define RIGHT_ARROW 124
+# define LEFT_ARROW 123
+# define ESC 53
 # define FOV 60*PI/180
 # define WALL_STRIP_WIDTH 1
-# define NUM_RAYS 1880
+# define NUM_RAYS WIN_WIDTH
+
+
+typedef struct s_wall_cordinate
+{
+	int top;
+	int bottom;
+}			t_wall_cordinate;
 
 typedef struct s_ray
 {
-	float ray_angle;
-	float wall_hit_x;
-	float wall_hit_y;
-	float x_distance;
-	float y_distance;
-	float y_step_h;
-    float x_step_h;
-	float y_step_v;
-    float x_step_v;
-    float y_intercept_h;
-    float x_intercept_h;
-	float y_intercept_v;
-    float x_intercept_v;
+	float 				ray_angle;
+	float 				wall_hit_x;
+	float 				wall_hit_y;
+	float 				distance;
+	float 				y_step_h;
+    float 				x_step_h;
+	float 				y_step_v;
+    float 				x_step_v;
+	float 				distance_to_wall;
+    float 				y_intercept_h;
+    float 				x_intercept_h;
+	float 				y_intercept_v;
+    float 				x_intercept_v;
+	float 				distance_pojection_plane;
+	float 				wall_strip_height;
+	t_wall_cordinate 	wall_cordinate;
 }			t_ray;
 
 
