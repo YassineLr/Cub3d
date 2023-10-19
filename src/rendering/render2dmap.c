@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/18 19:24:54 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/19 03:29:22 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
 	char	*dst;
 
-    if(x < 0 || x > WIN_HEIGHT || y < 0 || y > WIN_WIDTH)
+    if(x < 0 || x >= WIN_HEIGHT || y < 0 || y >= WIN_WIDTH)
         return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
@@ -210,44 +210,71 @@ void    playermovement(t_data *data)
 //     }
 // }
 
-void    renderprojectionwalls(t_data *data)
+void    rays_parameters(t_data *data)
 {
     int i;
     
     i = 0;
     while (i < NUM_RAYS)
     {
+        data->player.rays[i].distance = data->player.rays[i].distance * cos(FOV/2);
         data->player.rays[i].distance_pojection_plane = (WIN_WIDTH/2) * tan(FOV/2);
-        data->player.rays[i].wall_strip_height = (TILE_SIZE/data->player.rays->distance * data->player.rays->distance_pojection_plane);
+        data->player.rays[i].wall_strip_height = (TILE_SIZE/data->player.rays[i].distance * data->player.rays[i].distance_pojection_plane);
         data->player.rays[i].wall_cordinate.top = (WIN_HEIGHT/2) - (data->player.rays[i].wall_strip_height/2);
+        if (data->player.rays[i].wall_cordinate.top < 0) 
+        {
+            // data->player.rays[i].wall_cordinate.bottom -= data->player.rays[i].wall_cordinate.top;
+            data->player.rays[i].wall_cordinate.top = 0;
+        }
         data->player.rays[i].wall_cordinate.bottom = data->player.rays[i].wall_cordinate.top + data->player.rays[i].wall_strip_height;
+        if(data->player.rays[i].wall_cordinate.bottom  > WIN_HEIGHT)
+             data->player.rays[i].wall_cordinate.bottom  = WIN_HEIGHT;
+        int j = data->player.rays[i].wall_cordinate.top;
+        // while (j < WIN_HEIGHT) 
+        // {
+        //         // my_mlx_pixel_put(data->mlx, i, j, 0x00FFFFFF);
+        //     // else 
+        //         my_mlx_pixel_put(data->mlx, i, j, 0xffffff);
+        //     j++;
+        // }
         i++;        
     }
 }
 
 void    rendring(t_data *data)
 {
-    int i = 0;
-
-    while(i < NUM_RAYS)
+    int i;
+    
+    i = 0;
+    // printf("here\n");
+    while (i < WIN_WIDTH) 
     {
-        plotLine(data, i,i , 0, data->player.rays[i].wall_cordinate.top, 0x123456);
-        plotLine(data, i,i , data->player.rays[i].wall_cordinate.top, data->player.rays[i].wall_cordinate.bottom, 0x123456);
-        plotLine(data, i,i , data->player.rays[i].wall_cordinate.bottom, WIN_HEIGHT, 0x123456);
+        int j = 0;
+        while (j < WIN_HEIGHT) 
+        {
+            if (j >= data->player.rays[i].wall_cordinate.top && j <= data->player.rays[i].wall_cordinate.bottom)
+                my_mlx_pixel_put(data->mlx, i, j, 0xf0f0f0f0);
+            else if (j < data->player.rays[i].wall_cordinate.bottom)
+                my_mlx_pixel_put(data->mlx, i, j, 0xffffff);
+            else
+                my_mlx_pixel_put(data->mlx, i, j, 0x070707);
+            j++;
+        }
+        i++;
     }
 }
 int render2dmap(t_data *data)
 {
     int i;
     
-    data->mlx->img = mlx_new_image(data->mlx->mlx_ptr, WIN_HEIGHT, WIN_WIDTH);
+    data->mlx->img = mlx_new_image(data->mlx->mlx_ptr,  WIN_WIDTH, WIN_HEIGHT);
 	data->mlx->addr = mlx_get_data_addr(data->mlx->img, &data->mlx->bits_per_pixel, &data->mlx->line_length, &data->mlx->endian);
-    draw2dmap(data);
+    // draw2dmap(data);
     playermovement(data);
-    renderplayer(data, 5);
+    // renderplayer(data, 5);
     cast_all_rays(data);
-    // renderprojectionwalls(data);
-    // rendring(data);
+    rays_parameters(data);
+    rendring(data);
     mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win, data->mlx->img, 0,0);
     mlx_destroy_image(data->mlx->mlx_ptr, data->mlx->img);
     return (1);

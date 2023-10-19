@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:11:16 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/18 20:26:14 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/19 00:44:23 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void cast_ray(t_ray *ray, t_data *data)
     x_intersections(ray, data);
     y_intersections(ray, data);
     distance_to_wall(ray, data);
-    plotLine(data,data->player.x, data->player.y, ray->wall_hit_x, ray->wall_hit_y, 0x00FF00);    
+    // plotLine(data,data->player.x, data->player.y, ray->wall_hit_x, ray->wall_hit_y, 0x00FF00);    
 }
 
 // void    finding_x_intercept(t_ray ray)
@@ -75,7 +75,7 @@ void x_intersections(t_ray *ray, t_data *data)
     
     if(ray->ray_angle > M_PI)
     {
-        ray->y_intercept_h = (int)(data->player.y / TILE_SIZE) * TILE_SIZE - 1; 
+        ray->y_intercept_h = (int)(data->player.y / TILE_SIZE) * TILE_SIZE - 1.5; 
         ray->x_intercept_h = (data->player.y - ray->y_intercept_h)*arc_tan +data->player.x;
         ray->y_step_h = -TILE_SIZE;
     }
@@ -109,7 +109,7 @@ void    y_intersections(t_ray *ray, t_data *data)
     
     if(ray->ray_angle > M_PI/2 && ray->ray_angle < 3 * M_PI/2)
     {
-        ray->x_intercept_v = (int)(data->player.x / TILE_SIZE) * TILE_SIZE - 1; 
+        ray->x_intercept_v = (int)(data->player.x / TILE_SIZE) * TILE_SIZE - 1.5; 
         ray->y_intercept_v = (data->player.x - ray->x_intercept_v)*arc_tan +data->player.y;
         ray->x_step_v = -TILE_SIZE;
     }

@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/10/18 17:30:49 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/19 01:24:58 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdbool.h>
 
 # define WIN_NAME "Cub3d"
-# define WIN_HEIGHT 1400
-# define WIN_WIDTH 920
+# define WIN_HEIGHT 920
+# define WIN_WIDTH 1080
 # define PI 3.1415
 # define TILE_SIZE 64
 # define KEYDOWN 125
@@ -39,8 +39,8 @@
 
 typedef struct s_wall_cordinate
 {
-	int top;
-	int bottom;
+	float top;
+	float bottom;
 }			t_wall_cordinate;
 
 typedef struct s_ray
