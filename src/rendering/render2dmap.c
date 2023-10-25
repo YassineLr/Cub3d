@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/19 03:29:22 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/25 09:04:14 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,16 +253,17 @@ void    rendring(t_data *data)
         while (j < WIN_HEIGHT) 
         {
             if (j >= data->player.rays[i].wall_cordinate.top && j <= data->player.rays[i].wall_cordinate.bottom)
-                my_mlx_pixel_put(data->mlx, i, j, 0xf0f0f0f0);
+                my_mlx_pixel_put(data->mlx, i, j, 0xffff00);
             else if (j < data->player.rays[i].wall_cordinate.bottom)
-                my_mlx_pixel_put(data->mlx, i, j, 0xffffff);
+                my_mlx_pixel_put(data->mlx, i, j, 0xf94449);
             else
-                my_mlx_pixel_put(data->mlx, i, j, 0x070707);
+                my_mlx_pixel_put(data->mlx, i, j, 0x0000FF);
             j++;
         }
         i++;
     }
 }
+
 int render2dmap(t_data *data)
 {
     int i;
