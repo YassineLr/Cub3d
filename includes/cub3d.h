@@ -79,7 +79,7 @@ typedef struct s_palyer
 	float	movespeed;
 	float	rotationspeed;
 	int		to_do;
-	t_ray	*rays;
+	t_ray	*;
 }			t_player;
 
 typedef struct s_get_color

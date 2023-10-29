@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/25 09:04:14 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/28 14:04:17 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,31 +212,22 @@ void    playermovement(t_data *data)
 
 void    rays_parameters(t_data *data)
 {
-    int i;
+    int     i;
+    double  correct_wall_distance;
     
     i = 0;
     while (i < NUM_RAYS)
     {
+        correct_wall_distance = data->player.rays[i].distance * cos(data->player.rays[i].ray_angle - data->player.ang);
         data->player.rays[i].distance = data->player.rays[i].distance * cos(FOV/2);
         data->player.rays[i].distance_pojection_plane = (WIN_WIDTH/2) * tan(FOV/2);
-        data->player.rays[i].wall_strip_height = (TILE_SIZE/data->player.rays[i].distance * data->player.rays[i].distance_pojection_plane);
+        data->player.rays[i].wall_strip_height = (TILE_SIZE/correct_wall_distance * data->player.rays[i].distance_pojection_plane);
         data->player.rays[i].wall_cordinate.top = (WIN_HEIGHT/2) - (data->player.rays[i].wall_strip_height/2);
         if (data->player.rays[i].wall_cordinate.top < 0) 
-        {
-            // data->player.rays[i].wall_cordinate.bottom -= data->player.rays[i].wall_cordinate.top;
             data->player.rays[i].wall_cordinate.top = 0;
-        }
         data->player.rays[i].wall_cordinate.bottom = data->player.rays[i].wall_cordinate.top + data->player.rays[i].wall_strip_height;
         if(data->player.rays[i].wall_cordinate.bottom  > WIN_HEIGHT)
              data->player.rays[i].wall_cordinate.bottom  = WIN_HEIGHT;
-        int j = data->player.rays[i].wall_cordinate.top;
-        // while (j < WIN_HEIGHT) 
-        // {
-        //         // my_mlx_pixel_put(data->mlx, i, j, 0x00FFFFFF);
-        //     // else 
-        //         my_mlx_pixel_put(data->mlx, i, j, 0xffffff);
-        //     j++;
-        // }
         i++;        
     }
 }
@@ -246,7 +237,6 @@ void    rendring(t_data *data)
     int i;
     
     i = 0;
-    // printf("here\n");
     while (i < WIN_WIDTH) 
     {
         int j = 0;

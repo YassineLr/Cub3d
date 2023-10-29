@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:11:16 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/25 09:17:58 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/25 10:53:34 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void x_intersections(t_ray *ray, t_data *data)
     
     if(ray->ray_angle > M_PI)
     {
-        ray->y_intercept_h = (int)(data->player.y / TILE_SIZE) * TILE_SIZE -0.01; 
-        ray->x_intercept_h = (data->player.y - ray->y_intercept_h)*arc_tan +data->player.x;
+        ray->y_intercept_h = (int)(data->player.y / TILE_SIZE) * TILE_SIZE  - 0.001; 
+        ray->x_intercept_h = (data->player.y - ray->y_intercept_h) * arc_tan + data->player.x;
         ray->y_step_h = -TILE_SIZE;
     }
     else if(ray->ray_angle < M_PI)
@@ -88,7 +88,7 @@ void x_intersections(t_ray *ray, t_data *data)
         ray->y_intercept_h = data->player.y;
         ray->x_intercept_h = data->player.x;
     }
-    ray->x_step_h = -ray->y_step_h * arc_tan;;
+    ray->x_step_h = -ray->y_step_h * arc_tan;
     while (ray->x_intercept_h >= 0 &&  ray->x_intercept_h <= data->map_w * TILE_SIZE && ray->y_intercept_h >= 0 && ray->y_intercept_h <= data->map_h * TILE_SIZE)
     {
         if(has_wall_at(data ,ray->x_intercept_h , ray->y_intercept_h))
@@ -107,7 +107,7 @@ void    y_intersections(t_ray *ray, t_data *data)
     
     if(ray->ray_angle > M_PI/2 && ray->ray_angle < 3 * M_PI/2)
     {
-        ray->x_intercept_v = (int)(data->player.x / TILE_SIZE) * TILE_SIZE - 0.01; 
+        ray->x_intercept_v = (int)(data->player.x / TILE_SIZE) * TILE_SIZE - 0.001; 
         ray->y_intercept_v = (data->player.x - ray->x_intercept_v)*arc_tan +data->player.y;
         ray->x_step_v = -TILE_SIZE;
     }
