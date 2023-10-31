@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:11:16 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/25 10:53:34 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/31 08:37:19 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,26 +29,6 @@ void    cast_all_rays(t_data *data)
     }
 }
 
-// void render_rays(t_data *data)
-// {
-//     int i;
-
-//     i = 0;
-//     while (i < NUM_RAYS)
-//     {
-//         plotLine(data,data->player.x, data->player.y, data->player.rays[i].wall_hit_x, data->player.rays[i].wall_hit_y, 0x00FF00);
-//         i++;
-//     }
-// }
-
-// int     ray_direction(t_ray *ray)
-// {
-//     ray->is_ray_facing_up = (ray->ray_angle > 0 && ray->ray_angle < PI);
-//     ray->is_ray_facing_down = !ray->is_ray_facing_up;
-//     ray->is_ray_facing_right = (ray->ray_angle < (PI/2) && ray->ray_angle > 1.5 * PI);
-//     ray->is_ray_facing_left = !ray->is_ray_facing_right;
-// }
-
 void cast_ray(t_ray *ray, t_data *data)
 {
     x_intersections(ray, data);
@@ -57,15 +37,6 @@ void cast_ray(t_ray *ray, t_data *data)
     plotLine(data,data->player.x, data->player.y, ray->wall_hit_x, ray->wall_hit_y, 0x00FF00);    
 }
 
-// void    finding_x_intercept(t_ray ray)
-// {
-    
-// }
-
-// void    finding_y_intercept(t_ray ray)
-// {
-    
-// }
 
 void x_intersections(t_ray *ray, t_data *data)
 {

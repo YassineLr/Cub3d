@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/28 14:04:17 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/31 08:45:16 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,8 @@ void    initplayer(t_data *data)
     data->player.y *= TILE_SIZE ;
     data->player.turndirection = 0;
     data->player.walkdirection = 0;
-    data->player.movespeed = 3.0;
-    data->player.rotationspeed = 2 * (PI / 180);
+    data->player.movespeed = 1.5;
+    data->player.rotationspeed = 1.5 * (PI / 180);
     data->player.to_do = 0;
 }
 
@@ -184,31 +184,12 @@ void    playermovement(t_data *data)
     data->player.ang = angles_normalizer(data->player.ang);
     new_x = data->player.x + cos (data->player.ang) * movestep;
     new_y = data->player.y + sin (data->player.ang) * movestep;
-    if(!has_wall_at(data, new_x, new_y))
+    if(!has_wall_at(data, new_x , new_y))
     {
         data->player.x = new_x;
         data->player.y = new_y;
     }
 }
-
-// void draw_filled_rectangle(void *mlx_ptr, void *win_ptr, int x, int y, int width, int height, int color)
-// {
-//     int i;
-//     int j;
-
-//     printf("x = %d, y = %d, width = %d, height = %d\n", x, y, width, height);
-//     i = x;
-//     while (i < x + width)
-//     {
-//         j = y;
-//         while (j < y + height)
-//         {
-//             mlx_pixel_put(mlx_ptr, win_ptr, i, j, color);
-//             j++;
-//         }
-//         i++;
-//     }
-// }
 
 void    rays_parameters(t_data *data)
 {
@@ -228,7 +209,7 @@ void    rays_parameters(t_data *data)
         data->player.rays[i].wall_cordinate.bottom = data->player.rays[i].wall_cordinate.top + data->player.rays[i].wall_strip_height;
         if(data->player.rays[i].wall_cordinate.bottom  > WIN_HEIGHT)
              data->player.rays[i].wall_cordinate.bottom  = WIN_HEIGHT;
-        i++;        
+        i++;
     }
 }
 

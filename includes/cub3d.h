@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/10/19 01:24:58 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/10/31 08:47:23 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@
 
 # define WIN_NAME "Cub3d"
 # define WIN_HEIGHT 920
-# define WIN_WIDTH 1080
+# define WIN_WIDTH 920
 # define PI 3.1415
 # define TILE_SIZE 64
-# define KEYDOWN 125
-# define KEYUP 126
-# define RIGHT_ARROW 124
-# define LEFT_ARROW 123
-# define ESC 53
+# define KEYDOWN 65364
+# define KEYUP 65362
+# define RIGHT_ARROW 65363
+# define LEFT_ARROW 65361
+# define ESC 65307
 # define FOV 60*PI/180
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS WIN_WIDTH
@@ -79,7 +79,7 @@ typedef struct s_palyer
 	float	movespeed;
 	float	rotationspeed;
 	int		to_do;
-	t_ray	*;
+	t_ray	*rays;
 }			t_player;
 
 typedef struct s_get_color
