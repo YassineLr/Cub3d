@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 03:03:45 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/22 12:36:21 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/05 23:55:34 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void get_file_name(char *name, t_data *data)
 		ft_exit(data, "Not the same '.cub'", 1);
 }
 
-static void	init_data(t_data *data)
+static void init_data(t_data *data)
 {
 	ft_bzero(data, sizeof(t_data));
 	ft_bzero(&data->textures, sizeof(t_texture));
@@ -72,7 +72,36 @@ static void	init_data(t_data *data)
 // 	}
 // }
 
-void	init_game(t_data *data, int ac, char **av)
+t_image init_texture(t_data *data)
+{
+	t_image image;
+	// image = malloc(sizeof(t_image));
+	// printf("%s   %d   %d\n", data->textures.no_texture, data->textures.width, data->textures.height);
+	image.img = mlx_xpm_file_to_image(data->mlx->mlx_ptr, data->textures.no_texture, &data->textures.width, &data->textures.height);
+	if (!image.img)
+		ft_exit(data, "cannot open this image", 1);
+	image.addr = mlx_get_data_addr(image.img, &image.bits_per_pixel, &image.line_length, &image.endian);
+	if (!image.addr)
+		ft_exit(data, "cannot get data address from texture", 1);
+	return (image);
+}
+void init_textures(t_data *data)
+{
+	data->textures.nord_image = init_texture(data);
+	data->textures.west_image = init_texture(data);
+	data->textures.east_image = init_texture(data);
+	data->textures.south_image = init_texture(data);
+	
+	// data->textures.nord_image = mlx_xpm_file_to_image(data->mlx->mlx_ptr, data->textures.no_texture, &data->textures.width, &data->textures.height);
+	// data->textures.west_image = mlx_xpm_file_to_image(data->mlx->mlx_ptr, data->textures.no_texture, &data->textures.width, &data->textures.height);
+	// data->textures.east_image = mlx_xpm_file_to_image(data->mlx->mlx_ptr, data->textures.no_texture, &data->textures.width, &data->textures.height);
+	// data->textures.south_image = mlx_xpm_file_to_image(data->mlx->mlx_ptr, data->textures.no_texture, &data->textures.width, &data->textures.height);
+	// if (data->textures.height != data->textures.width)
+	// 	ft_exit(data, "can't open this image", 1);
+	// data->textures.addr = mlx_get_data_addr()
+}
+
+void init_game(t_data *data, int ac, char **av)
 {
 	init_data(data);
 	check_args(ac, data);
@@ -85,5 +114,6 @@ void	init_game(t_data *data, int ac, char **av)
 		ft_exit(data, "invalide information", 1);
 	check_map(data);
 	data->mlx = mlx_initializer();
+	init_textures(data);
 	// affich_info(data);
 }

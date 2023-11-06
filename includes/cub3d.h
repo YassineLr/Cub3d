@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/10/31 08:47:23 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/05 23:36:37 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ typedef struct s_wall_cordinate
 typedef struct s_ray
 {
 	float 				ray_angle;
+	int					offset_x;
+	double				offset_y;
 	float 				wall_hit_x;
 	float 				wall_hit_y;
 	float 				distance;
@@ -60,6 +62,8 @@ typedef struct s_ray
     float 				x_intercept_v;
 	float 				distance_pojection_plane;
 	float 				wall_strip_height;
+	bool				player_hit_horizontal_wall;
+	bool				player_hit_vertical_wall;
 	t_wall_cordinate 	wall_cordinate;
 }			t_ray;
 
@@ -96,6 +100,15 @@ typedef struct s_color
 	int	celling;
 }			t_color;
 
+typedef struct s_image
+{
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
+}			t_image;
+
 typedef struct s_texture
 {
 	int		height;
@@ -104,6 +117,10 @@ typedef struct s_texture
 	char	*so_texture;
 	char	*ea_texture;
 	char	*we_texture;
+	t_image	nord_image;
+	t_image	east_image;
+	t_image	west_image;
+	t_image	south_image;
 }			t_texture;
 
 
@@ -139,6 +156,10 @@ typedef struct s_coordinate
 
 
 void 	init_game(t_data *data, int ac, char **av);
+
+void init_textures(t_data *data);
+
+t_image init_texture(t_data *data);
 void	ft_exit(t_data *data, const char *str, int code);
 void	free_ptr(char **str);
 void	get_data(t_data *data);
@@ -157,6 +178,7 @@ int		keypressed(int keycode, t_data *data);
 void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
 void    playermovement(t_data *data);
 void    initplayer(t_data *data);
+unsigned int	my_mlx_pixel_get(t_image *img, int x, int y);
 int 	keyreleased(int keycode, t_data *data);
 void    cast_all_rays(t_data *data);
 void 	plotLine(t_data *cub3D, int x0, int y0, int x1, int y1, int color);

@@ -1,8 +1,8 @@
-NO  ./xpms/walls/1.xpm   
-SO  ./xpms/walls/2.xpm
-WE  ./xpms/walls/3.xpm
-EA  ./xpms/walls/4.xpm
-C  0, 255, 25
+NO  ./texture/NO.xpm  
+SO  ./texture/NO.xpm
+WE  ./texture/NO.xpm
+EA  ./texture/NO.xpm
+C  10, 200, 25
 F  0, 128, 0 
 
 11111111111111111111

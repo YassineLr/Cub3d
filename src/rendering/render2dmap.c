@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render2dmap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/31 08:45:16 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/06 00:49:53 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,12 @@ void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
         return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
+}
+
+unsigned int	my_mlx_pixel_get(t_image *img, int x, int y)
+{
+	return (*(unsigned int *)(img->addr
+		+ (y * img->bits_per_pixel + x * (img->bits_per_pixel / 8))));
 }
 
 void    drawrectangle(t_mlx *mlx, t_cordinate point, int color)
@@ -207,8 +213,19 @@ void    rays_parameters(t_data *data)
         if (data->player.rays[i].wall_cordinate.top < 0) 
             data->player.rays[i].wall_cordinate.top = 0;
         data->player.rays[i].wall_cordinate.bottom = data->player.rays[i].wall_cordinate.top + data->player.rays[i].wall_strip_height;
-        if(data->player.rays[i].wall_cordinate.bottom  > WIN_HEIGHT)
-             data->player.rays[i].wall_cordinate.bottom  = WIN_HEIGHT;
+        if(data-  data->player.rays[i].wall_cordinate.bottom  = WIN_HEIGHT;
+        if (data->player.rays[i].wall_strip_height > WIN_HEIGHT)
+        {
+            data->player.rays[i].offset_y =  i + (data->rays[vars.x].wall_strip_h / 2)
+            - (HEIGHT / 2)* ((double)TEXTURE_HEIGHT
+                / data->rays[i].wall_strip_h);
+        }>player.rays[i].wall_cordinate.bottom  > WIN_HEIGHT)
+           
+        if (data->player.rays[i].player_hit_horizontal_wall == 1)
+            data->player.rays[i].offset_x = (int)data->rays[i].wall_hit_y % TILE_SIZE;
+        else
+            data->player.rays[i].offset_x = (int)data->rays[i].wall_hit_x % TILE_SIZE;
+        // printf("ofset y : %f \t ofset x : %d\n",data->player.rays[i].offset_y, data->player.rays[i].offset_x );
         i++;
     }
 }
@@ -216,6 +233,7 @@ void    rays_parameters(t_data *data)
 void    rendring(t_data *data)
 {
     int i;
+    unsigned int    color;
     
     i = 0;
     while (i < WIN_WIDTH) 
@@ -224,11 +242,19 @@ void    rendring(t_data *data)
         while (j < WIN_HEIGHT) 
         {
             if (j >= data->player.rays[i].wall_cordinate.top && j <= data->player.rays[i].wall_cordinate.bottom)
-                my_mlx_pixel_put(data->mlx, i, j, 0xffff00);
+            {
+                // printf
+                color = my_mlx_pixel_get(&data->textures.nord_image, (int)data->player.rays[j].offset_x, (int)data->player.rays[j].offset_y);
+                // printf("==> %d\n", color);
+                my_mlx_pixel_put(data->mlx, i, j, color);
+                data->player.rays[j].offset_y += (double)data->textures.height / data->player.rays[j].wall_strip_height;
+                // j++;
+                // continue;
+            }
             else if (j < data->player.rays[i].wall_cordinate.bottom)
-                my_mlx_pixel_put(data->mlx, i, j, 0xf94449);
+                my_mlx_pixel_put(data->mlx, i, j, data->colors.celling);
             else
-                my_mlx_pixel_put(data->mlx, i, j, 0x0000FF);
+                my_mlx_pixel_put(data->mlx, i, j, data->colors.floor);
             j++;
         }
         i++;
@@ -241,6 +267,7 @@ int render2dmap(t_data *data)
     
     data->mlx->img = mlx_new_image(data->mlx->mlx_ptr,  WIN_WIDTH, WIN_HEIGHT);
 	data->mlx->addr = mlx_get_data_addr(data->mlx->img, &data->mlx->bits_per_pixel, &data->mlx->line_length, &data->mlx->endian);
+    // printf("{%p}\n", data->mlx->addr);
     // draw2dmap(data);
     playermovement(data);
     // renderplayer(data, 5);

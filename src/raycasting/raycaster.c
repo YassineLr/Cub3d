@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:11:16 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/31 08:37:19 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/03 09:19:44 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void cast_ray(t_ray *ray, t_data *data)
     x_intersections(ray, data);
     y_intersections(ray, data);
     distance_to_wall(ray, data);
-    plotLine(data,data->player.x, data->player.y, ray->wall_hit_x, ray->wall_hit_y, 0x00FF00);    
+    // plotLine(data,data->player.x, data->player.y, ray->wall_hit_x, ray->wall_hit_y, 0x00FF00);    
 }
 
 
@@ -70,6 +70,7 @@ void x_intersections(t_ray *ray, t_data *data)
             ray->y_intercept_h += ray->y_step_h;
         }
     }
+    ray->player_hit_horizontal_wall = 0;
 }
 
 void    y_intersections(t_ray *ray, t_data *data)
@@ -104,6 +105,7 @@ void    y_intersections(t_ray *ray, t_data *data)
             ray->y_intercept_v += ray->y_step_v;
         }
     }
+    ray->player_hit_vertical_wall = 0;
  }
 
 double distance_between_points(double x1, double y1, double x2, double y2)
@@ -120,12 +122,14 @@ void    distance_to_wall(t_ray *ray, t_data *data)
     vert_distance = distance_between_points(data->player.x, data->player.y, ray->x_intercept_v, ray->y_intercept_v);
     if (horz_distance > vert_distance)
     {
+        ray->player_hit_horizontal_wall = 1;
         ray->wall_hit_x = ray->x_intercept_v ;
         ray->wall_hit_y = ray->y_intercept_v;
         ray->distance = vert_distance;
     }
     else
     {
+        ray->player_hit_vertical_wall = 1;
         ray->wall_hit_x = ray->x_intercept_h;
         ray->wall_hit_y = ray->y_intercept_h;
         ray->distance = horz_distance;
