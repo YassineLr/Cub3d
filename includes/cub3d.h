@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/05 23:36:37 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/08 01:34:01 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # include <stdbool.h>
 
 # define WIN_NAME "Cub3d"
-# define WIN_HEIGHT 920
-# define WIN_WIDTH 920
+# define WIN_WIDTH 1080
+# define WIN_HEIGHT 720
 # define PI 3.1415
 # define TILE_SIZE 64
 # define KEYDOWN 65364
@@ -46,7 +46,7 @@ typedef struct s_wall_cordinate
 typedef struct s_ray
 {
 	float 				ray_angle;
-	int					offset_x;
+	double				offset_x;
 	double				offset_y;
 	float 				wall_hit_x;
 	float 				wall_hit_y;

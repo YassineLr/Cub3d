@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycaster.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:11:16 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/11/03 09:19:44 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/08 01:28:44 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void x_intersections(t_ray *ray, t_data *data)
         ray->x_intercept_h = data->player.x;
     }
     ray->x_step_h = -ray->y_step_h * arc_tan;
-    while (ray->x_intercept_h >= 0 &&  ray->x_intercept_h <= data->map_w * TILE_SIZE && ray->y_intercept_h >= 0 && ray->y_intercept_h <= data->map_h * TILE_SIZE)
+    while (ray->x_intercept_h >= 0 &&  ray->x_intercept_h <= WIN_WIDTH * TILE_SIZE && ray->y_intercept_h >= 0 && ray->y_intercept_h <= WIN_HEIGHT * TILE_SIZE)
     {
         if(has_wall_at(data ,ray->x_intercept_h , ray->y_intercept_h))
             break ;
@@ -95,7 +95,7 @@ void    y_intersections(t_ray *ray, t_data *data)
         ray->y_intercept_v = data->player.y;
     }
     ray->y_step_v = -ray->x_step_v * arc_tan;
-    while (ray->x_intercept_v >= 0 &&  ray->x_intercept_v <= data->map_w * TILE_SIZE && ray->y_intercept_v >= 0 && ray->y_intercept_v <= data->map_h * TILE_SIZE)
+    while (ray->x_intercept_v >= 0 &&  ray->x_intercept_v <= WIN_WIDTH *TILE_SIZE && ray->y_intercept_v >= 0 && ray->y_intercept_v <= WIN_HEIGHT * TILE_SIZE)
     {
         if(has_wall_at(data ,ray->x_intercept_v, ray->y_intercept_v))
             break ;

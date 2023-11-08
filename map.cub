@@ -2,8 +2,9 @@ NO  ./texture/NO.xpm
 SO  ./texture/NO.xpm
 WE  ./texture/NO.xpm
 EA  ./texture/NO.xpm
-C  10, 200, 25
-F  0, 128, 0 
+
+F 96,153,102
+C 145,200,228
 
 11111111111111111111
 1N000100000000010001

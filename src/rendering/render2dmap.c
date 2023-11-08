@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render2dmap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/11/06 00:49:53 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/08 01:31:14 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,27 @@ void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 {
 	char	*dst;
 
-    if(x < 0 || x >= WIN_HEIGHT || y < 0 || y >= WIN_WIDTH)
+    if(x < 0 || x >= WIN_WIDTH || y < 0 || y >= WIN_HEIGHT)
         return ;
 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
 	*(unsigned int*)dst = color;
 }
 
-unsigned int	my_mlx_pixel_get(t_image *img, int x, int y)
+int    get_texture_pixel_color(int x, int y, t_data *data)
 {
-	return (*(unsigned int *)(img->addr
-		+ (y * img->bits_per_pixel + x * (img->bits_per_pixel / 8))));
-}
+    int    offset;
+    int    color;
 
+    if (x < 0 || y < 0 || x > data->textures.width || y > data->textures.height)
+        return (0);
+    offset = (y * data->textures.width + x) * (data->textures.east_image.bits_per_pixel / 8);
+    if (offset >= 0 && offset < data->textures.width * data->textures.height
+        * (data->textures.east_image.bits_per_pixel / 8))
+        color = *(int *)(data->textures.east_image.addr + offset);
+    else
+        color = 0x000000;
+    return (color);
+}
 void    drawrectangle(t_mlx *mlx, t_cordinate point, int color)
 {
     int i;
@@ -190,7 +199,11 @@ void    playermovement(t_data *data)
     data->player.ang = angles_normalizer(data->player.ang);
     new_x = data->player.x + cos (data->player.ang) * movestep;
     new_y = data->player.y + sin (data->player.ang) * movestep;
-    if(!has_wall_at(data, new_x , new_y))
+    if(!has_wall_at(data, new_x , new_y) 
+        && !has_wall_at(data, new_x +2, new_y +2) 
+        && !has_wall_at(data, new_x -2, new_y -2)
+        && !has_wall_at(data, new_x -2, new_y +2)
+        && !has_wall_at(data, new_x +2, new_y -2))
     {
         data->player.x = new_x;
         data->player.y = new_y;
@@ -213,19 +226,12 @@ void    rays_parameters(t_data *data)
         if (data->player.rays[i].wall_cordinate.top < 0) 
             data->player.rays[i].wall_cordinate.top = 0;
         data->player.rays[i].wall_cordinate.bottom = data->player.rays[i].wall_cordinate.top + data->player.rays[i].wall_strip_height;
-        if(data-  data->player.rays[i].wall_cordinate.bottom  = WIN_HEIGHT;
-        if (data->player.rays[i].wall_strip_height > WIN_HEIGHT)
-        {
-            data->player.rays[i].offset_y =  i + (data->rays[vars.x].wall_strip_h / 2)
-            - (HEIGHT / 2)* ((double)TEXTURE_HEIGHT
-                / data->rays[i].wall_strip_h);
-        }>player.rays[i].wall_cordinate.bottom  > WIN_HEIGHT)
-           
-        if (data->player.rays[i].player_hit_horizontal_wall == 1)
-            data->player.rays[i].offset_x = (int)data->rays[i].wall_hit_y % TILE_SIZE;
+        if(data->player.rays[i].wall_cordinate.bottom  > WIN_HEIGHT)
+             data->player.rays[i].wall_cordinate.bottom  = WIN_HEIGHT;
+        if (!data->player.rays[i].player_hit_vertical_wall)
+            data->player.rays[i].offset_x = (int)data->player.rays[i].wall_hit_y % TILE_SIZE;
         else
-            data->player.rays[i].offset_x = (int)data->rays[i].wall_hit_x % TILE_SIZE;
-        // printf("ofset y : %f \t ofset x : %d\n",data->player.rays[i].offset_y, data->player.rays[i].offset_x );
+            data->player.rays[i].offset_x = (int)data->player.rays[i].wall_hit_x % TILE_SIZE;
         i++;
     }
 }
@@ -233,7 +239,8 @@ void    rays_parameters(t_data *data)
 void    rendring(t_data *data)
 {
     int i;
-    unsigned int    color;
+    int color;
+    int distance_from_top = 0;
     
     i = 0;
     while (i < WIN_WIDTH) 
@@ -243,13 +250,10 @@ void    rendring(t_data *data)
         {
             if (j >= data->player.rays[i].wall_cordinate.top && j <= data->player.rays[i].wall_cordinate.bottom)
             {
-                // printf
-                color = my_mlx_pixel_get(&data->textures.nord_image, (int)data->player.rays[j].offset_x, (int)data->player.rays[j].offset_y);
-                // printf("==> %d\n", color);
+                distance_from_top = j - data->player.rays[i].wall_cordinate.top;
+                data->player.rays[i].offset_y = distance_from_top * ((double)data->textures.height / data->player.rays[i].wall_strip_height);
+                color = get_texture_pixel_color(data->player.rays[i].offset_x , data->player.rays[i].offset_y , data);
                 my_mlx_pixel_put(data->mlx, i, j, color);
-                data->player.rays[j].offset_y += (double)data->textures.height / data->player.rays[j].wall_strip_height;
-                // j++;
-                // continue;
             }
             else if (j < data->player.rays[i].wall_cordinate.bottom)
                 my_mlx_pixel_put(data->mlx, i, j, data->colors.celling);
@@ -267,7 +271,6 @@ int render2dmap(t_data *data)
     
     data->mlx->img = mlx_new_image(data->mlx->mlx_ptr,  WIN_WIDTH, WIN_HEIGHT);
 	data->mlx->addr = mlx_get_data_addr(data->mlx->img, &data->mlx->bits_per_pixel, &data->mlx->line_length, &data->mlx->endian);
-    // printf("{%p}\n", data->mlx->addr);
     // draw2dmap(data);
     playermovement(data);
     // renderplayer(data, 5);
@@ -278,3 +281,51 @@ int render2dmap(t_data *data)
     mlx_destroy_image(data->mlx->mlx_ptr, data->mlx->img);
     return (1);
 }
+
+//
+
+// int    draw_wall_column(t_data *data, t_point vars, t_point tex, int n)
+// {
+//     int    color;
+//     int    distance_from_top;
+
+//     distance_from_top = 0;
+//     while (vars.y < data->rays[vars.x].wall_cords.bot_pix)
+//     {
+//         distance_from_top = vars.y + (data->rays[vars.x].wall_strip_h / 2)
+//             - (HEIGHT / 2);
+//         tex.y = distance_from_top * ((double)TEXTURE_HEIGHT
+//                 / data->rays[vars.x].wall_strip_h);
+//         color = get_texture_pixel_color(tex.x, tex.y, data, n);
+//         my_mlx_pixel_put(data, vars.x, vars.y, color);
+//         vars.y++;
+//     }
+//     return (vars.y);
+// }
+
+// void    draw_3d_ray(t_data *data, int i)
+// {
+//     int        j;
+//     int        n;
+//     t_point    vars;
+//     t_point    tex_offset;
+
+//     tex_offset.x = 0;
+//     tex_offset.y = 0;
+//     if (data->rays[i].hit_vert)
+//         tex_offset.x = (int)data->rays[i].wall_hit_y % TILE_SIZE;
+//     else
+//         tex_offset.x = (int)data->rays[i].wall_hit_x % TILE_SIZE;
+//     n = get_textures(&data->rays[i]);
+//     j = -1;
+//     while (++j < data->rays[i].wall_cords.top_pix)
+//         my_mlx_pixel_put(data, i, j, data->map->c);
+//     vars.x = i;
+//     vars.y = j;
+//     j = draw_wall_column(data, vars, tex_offset, n);
+//     while (j < HEIGHT)
+//     {
+//         my_mlx_pixel_put(data, i, j, data->map->f);
+//         j++;
+//     }
+// }
