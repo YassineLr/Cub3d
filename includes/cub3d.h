@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/08 01:34:01 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/09 15:19:58 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,10 +117,7 @@ typedef struct s_texture
 	char	*so_texture;
 	char	*ea_texture;
 	char	*we_texture;
-	t_image	nord_image;
-	t_image	east_image;
-	t_image	west_image;
-	t_image	south_image;
+	t_image	image[4];
 }			t_texture;
 
 
