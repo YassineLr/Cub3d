@@ -6,12 +6,11 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:11:16 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/11/08 01:28:44 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/10 19:21:32 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
 void    cast_all_rays(t_data *data)
 {
     float   ray_angle;

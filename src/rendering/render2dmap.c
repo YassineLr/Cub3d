@@ -6,9 +6,10 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/11/08 01:48:27 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/11 04:25:24 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #include "../../includes/cub3d.h"
 
@@ -22,21 +23,22 @@ void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color)
 	*(unsigned int*)dst = color;
 }
 
-int    get_texture_pixel_color(int x, int y, t_data *data)
+int    get_texture_pixel_color(int x, int y, t_data *data, int n)
 {
     int    offset;
     int    color;
 
     if (x < 0 || y < 0 || x > data->textures.width || y > data->textures.height)
         return (0);
-    offset = (y * data->textures.width + x) * (data->textures.east_image.bits_per_pixel / 8);
+    offset = (y * data->textures.width + x) * (data->textures.image->bits_per_pixel / 8);
     if (offset >= 0 && offset < data->textures.width * data->textures.height
-        * (data->textures.east_image.bits_per_pixel / 8))
-        color = *(int *)(data->textures.east_image.addr + offset);
+        * (data->textures.image->bits_per_pixel / 8))
+        color = *(int *)(data->textures.image->addr + offset);
     else
         color = 0x000000;
     return (color);
 }
+
 void    drawrectangle(t_mlx *mlx, t_cordinate point, int color)
 {
     int i;
@@ -236,6 +238,16 @@ void    rays_parameters(t_data *data)
     }
 }
 
+int choose_texture(t_ray *ray)
+{
+    if (ray->player_hit_vertical_wall && ray->ray_angle > PI/2 && ray->ray_angle > 3*PI/2)
+        return (0);
+    else if (ray->player_hit_vertical_wall && !(ray->ray_angle > PI/2 && ray->ray_angle > 3*PI/2))
+        return (1);
+    else if (!ray->player_hit_vertical_wall && !(ray->ray_angle > 0 && ray->ray_angle < PI) )
+        return (2);
+    return (3);
+}
 void    rendring(t_data *data)
 {
     int i;
@@ -252,7 +264,8 @@ void    rendring(t_data *data)
             {
                 distance_from_top = j + (data->player.rays[i].wall_strip_height/2) - (WIN_HEIGHT/2);
                 data->player.rays[i].offset_y = distance_from_top * ((double)data->textures.height / data->player.rays[i].wall_strip_height);
-                color = get_texture_pixel_color(data->player.rays[i].offset_x , data->player.rays[i].offset_y , data);
+                int choice = choose_texture(&data->player.rays[i]);
+                color = get_texture_pixel_color(data->player.rays[i].offset_x ,data->player.rays[i].offset_y , data, choice);
                 my_mlx_pixel_put(data->mlx, i, j, color);
             }
             else if (j < data->player.rays[i].wall_cordinate.bottom)
@@ -282,7 +295,7 @@ int render2dmap(t_data *data)
     return (1);
 }
 
-//
+
 
 // int    draw_wall_column(t_data *data, t_point vars, t_point tex, int n)
 // {
@@ -294,7 +307,7 @@ int render2dmap(t_data *data)
 //     {
 //         distance_from_top = vars.y + (data->rays[vars.x].wall_strip_h / 2)
 //             - (HEIGHT / 2);
-//         tex.y = distance_from_top * ((double)TEXTURE_HEIGHT
+//         tex.y = distance_from_top * ((double)data->textures.height
 //                 / data->rays[vars.x].wall_strip_h);
 //         color = get_texture_pixel_color(tex.x, tex.y, data, n);
 //         my_mlx_pixel_put(data, vars.x, vars.y, color);

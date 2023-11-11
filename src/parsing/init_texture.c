@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 14:47:11 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/10 12:21:31 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/10 21:58:22 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_image init_texture(t_data *data, int flag)
 	}
 	else if (flag == 4)
 	{
-		init_game(data, data->textures.ea_texture, &image);
+		init_image(data, data->textures.ea_texture, &image);
 		// image.img = mlx_xpm_file_to_image(data->mlx->mlx_ptr, data->textures.no_texture, &data->textures.width, &data->textures.height);
 		// if (!image.img)
 		// 	ft_exit(data, "cannot open this image", 1);

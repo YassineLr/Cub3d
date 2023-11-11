@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/09 15:19:58 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/11 04:25:17 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ typedef struct s_wall_cordinate
 typedef struct s_ray
 {
 	float 				ray_angle;
-	double				offset_x;
-	double				offset_y;
+	int				offset_x;
+	int				offset_y;
 	float 				wall_hit_x;
 	float 				wall_hit_y;
 	float 				distance;
@@ -155,8 +155,9 @@ typedef struct s_coordinate
 void 	init_game(t_data *data, int ac, char **av);
 
 void init_textures(t_data *data);
+t_image init_texture(t_data *data, int flag);
 
-t_image init_texture(t_data *data);
+// t_image init_texture(t_data *data, int i);
 void	ft_exit(t_data *data, const char *str, int code);
 void	free_ptr(char **str);
 void	get_data(t_data *data);
@@ -191,6 +192,7 @@ void 	ver_intersections(t_ray *ray, t_player *player);
 void 	hor_intersections(t_ray *ray, t_player *player);
 int 	has_wall_at(t_data *data, float x, float y);
 void 	distance_to_wall(t_ray *ray, t_data *data);
+int    get_texture_pixel_color(int x, int y, t_data *data, int n);
 
 
 
