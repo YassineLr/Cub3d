@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render2dmap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/11/11 04:25:24 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/11 13:09:04 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int    get_texture_pixel_color(int x, int y, t_data *data, int n)
 
     if (x < 0 || y < 0 || x > data->textures.width || y > data->textures.height)
         return (0);
-    offset = (y * data->textures.width + x) * (data->textures.image->bits_per_pixel / 8);
+    offset = (y * data->textures.width + x) * (data->textures.image[n].bits_per_pixel / 8);
     if (offset >= 0 && offset < data->textures.width * data->textures.height
-        * (data->textures.image->bits_per_pixel / 8))
-        color = *(int *)(data->textures.image->addr + offset);
+        * (data->textures.image[n].bits_per_pixel / 8))
+        color = *(int *)(data->textures.image[n].addr + offset);
     else
         color = 0x000000;
     return (color);
