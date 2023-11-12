@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render2dmap.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/11/11 13:09:04 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/12 23:53:27 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void    initplayer(t_data *data)
     data->player.y *= TILE_SIZE ;
     data->player.turndirection = 0;
     data->player.walkdirection = 0;
-    data->player.movespeed = 1.5;
+    data->player.movespeed = 3.0;
     data->player.rotationspeed = 1.5 * (PI / 180);
     data->player.to_do = 0;
 }
@@ -222,7 +222,7 @@ void    rays_parameters(t_data *data)
     {
         correct_wall_distance = data->player.rays[i].distance * cos(data->player.rays[i].ray_angle - data->player.ang);
         data->player.rays[i].distance = data->player.rays[i].distance * cos(FOV/2);
-        data->player.rays[i].distance_pojection_plane = (WIN_WIDTH/2) * tan(FOV/2);
+        data->player.rays[i].distance_pojection_plane = (WIN_WIDTH/2) / tan(FOV/2);
         data->player.rays[i].wall_strip_height = (TILE_SIZE/correct_wall_distance * data->player.rays[i].distance_pojection_plane);
         data->player.rays[i].wall_cordinate.top = (WIN_HEIGHT/2) - (data->player.rays[i].wall_strip_height/2);
         if (data->player.rays[i].wall_cordinate.top < 0) 
@@ -238,15 +238,22 @@ void    rays_parameters(t_data *data)
     }
 }
 
-int choose_texture(t_ray *ray)
+int choose_texture(t_ray *ray, float ra)
 {
-    if (ray->player_hit_vertical_wall && ray->ray_angle > PI/2 && ray->ray_angle > 3*PI/2)
-        return (0);
-    else if (ray->player_hit_vertical_wall && !(ray->ray_angle > PI/2 && ray->ray_angle > 3*PI/2))
-        return (1);
-    else if (!ray->player_hit_vertical_wall && !(ray->ray_angle > 0 && ray->ray_angle < PI) )
-        return (2);
-    return (3);
+    if (ray->player_hit_vertical_wall)
+    {
+        if(ra > 0 && ra < PI)
+            return 0;
+        else
+            return 1;
+    }
+    else
+    {
+        if(ra > 0.5 * PI && ra < 1.5 * PI)
+            return 2;
+        else 
+            return 3;
+    }
 }
 void    rendring(t_data *data)
 {
@@ -264,8 +271,8 @@ void    rendring(t_data *data)
             {
                 distance_from_top = j + (data->player.rays[i].wall_strip_height/2) - (WIN_HEIGHT/2);
                 data->player.rays[i].offset_y = distance_from_top * ((double)data->textures.height / data->player.rays[i].wall_strip_height);
-                int choice = choose_texture(&data->player.rays[i]);
-                color = get_texture_pixel_color(data->player.rays[i].offset_x ,data->player.rays[i].offset_y , data, choice);
+                int choice = choose_texture(&data->player.rays[i] , data->player.rays[i].ray_angle);
+                color = get_texture_pixel_color(data->player.rays[i].offset_x ,data->player.rays[i].offset_y , data, 0);
                 my_mlx_pixel_put(data->mlx, i, j, color);
             }
             else if (j < data->player.rays[i].wall_cordinate.bottom)

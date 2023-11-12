@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/11 04:25:17 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/12 23:09:34 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include <stdio.h>
 # include <math.h>
 # include "../libft/libft.h"
-# include "minilibx-linux/mlx.h"
+ #include <mlx.h>
+// # include "minilibx-linux/mlx.h"
 # include <stdbool.h>
 
 # define WIN_NAME "Cub3d"
@@ -27,11 +28,11 @@
 # define WIN_HEIGHT 720
 # define PI 3.1415
 # define TILE_SIZE 64
-# define KEYDOWN 65364
-# define KEYUP 65362
-# define RIGHT_ARROW 65363
-# define LEFT_ARROW 65361
-# define ESC 65307
+# define KEYDOWN 125
+# define KEYUP 126
+# define RIGHT_ARROW 124
+# define LEFT_ARROW 123
+# define ESC 53
 # define FOV 60*PI/180
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS WIN_WIDTH
