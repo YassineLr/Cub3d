@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_texture.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 14:47:11 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/15 14:05:43 by mac              ###   ########.fr       */
+/*   Updated: 2023/11/15 22:22:25 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ t_image init_texture(t_data *data, int flag)
 		init_image(data, data->textures.no_texture, &image);
 	else if (flag == 1)
 		init_image(data, data->textures.we_texture, &image);
-	else if (flag == 3)
+	else if (flag == 2)
 		init_image(data, data->textures.ea_texture, &image);
-	else if (flag == 4)
+	else if (flag == 3)
 		init_image(data, data->textures.so_texture, &image);
 	return (image);
 }

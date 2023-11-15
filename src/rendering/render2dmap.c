@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/11/12 23:53:27 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/15 22:22:38 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,7 +272,7 @@ void    rendring(t_data *data)
                 distance_from_top = j + (data->player.rays[i].wall_strip_height/2) - (WIN_HEIGHT/2);
                 data->player.rays[i].offset_y = distance_from_top * ((double)data->textures.height / data->player.rays[i].wall_strip_height);
                 int choice = choose_texture(&data->player.rays[i] , data->player.rays[i].ray_angle);
-                color = get_texture_pixel_color(data->player.rays[i].offset_x ,data->player.rays[i].offset_y , data, 0);
+                color = get_texture_pixel_color(data->player.rays[i].offset_x ,data->player.rays[i].offset_y , data,choice);
                 my_mlx_pixel_put(data->mlx, i, j, color);
             }
             else if (j < data->player.rays[i].wall_cordinate.bottom)
