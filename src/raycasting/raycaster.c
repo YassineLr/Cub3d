@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 11:11:16 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/11/17 01:42:20 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/17 04:38:08 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void    cast_all_rays(t_data *data)
         ray_angle += FOV / NUM_RAYS;
         i++;
     }
+    // free(data->player.rays);
 }
 
 void cast_ray(t_ray *ray, t_data *data)

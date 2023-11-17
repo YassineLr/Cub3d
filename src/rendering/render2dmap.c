@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 16:48:58 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/11/17 04:07:51 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/17 04:40:31 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,7 @@ void    rendring(t_data *data)
         }
         i++;
     }
+    free(data->player.rays);
 }
 
 int render2dmap(t_data *data)
