@@ -6,18 +6,18 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 04:05:48 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/10/04 12:59:22 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/17 01:19:42 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-double  degretorad(double angle)
+float angles_normalizer(float angle)
 {
-	return (angle * (PI / 180.0));
-}
+    double result;
 
-double  radtodegre(double angle)
-{
-	return (angle * (180.0 / PI));
+    result = fmod((double)angle, 2 * PI);
+    if (result < 0)
+        result += 2 * PI;
+    return ((float)result);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 03:03:45 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/10 12:22:49 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/17 01:27:58 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,5 +103,4 @@ void init_game(t_data *data, int ac, char **av)
 	check_map(data);
 	data->mlx = mlx_initializer();
 	init_textures(data);
-	// affich_info(data);
 }

@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/12 23:09:34 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/17 04:00:48 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@
 # include <stdio.h>
 # include <math.h>
 # include "../libft/libft.h"
- #include <mlx.h>
-// # include "minilibx-linux/mlx.h"
+# include "minilibx-linux/mlx.h"
 # include <stdbool.h>
 
 # define WIN_NAME "Cub3d"
@@ -28,11 +27,15 @@
 # define WIN_HEIGHT 720
 # define PI 3.1415
 # define TILE_SIZE 64
-# define KEYDOWN 125
-# define KEYUP 126
-# define RIGHT_ARROW 124
-# define LEFT_ARROW 123
-# define ESC 53
+# define A_KEY 97
+# define D_KEY 100
+# define W_KEY 119
+# define S_KEY 115
+# define KEYDOWN 65364
+# define KEYUP 65362
+# define RIGHT_ARROW 65363
+# define LEFT_ARROW 65361
+# define ESC 65307
 # define FOV 60*PI/180
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS WIN_WIDTH
@@ -80,6 +83,7 @@ typedef struct s_palyer
 	float	ang;
 	int		walkdirection;
 	int		turndirection;
+	int		straff_direction;
 	float	rotationdirection;
 	float	movespeed;
 	float	rotationspeed;
@@ -153,47 +157,47 @@ typedef struct s_coordinate
 
 
 
-void 	init_game(t_data *data, int ac, char **av);
+void 			init_game(t_data *data, int ac, char **av);
+void			init_textures(t_data *data);
+t_image			init_texture(t_data *data, int flag);
+void			ft_exit(t_data *data, const char *str, int code);
+void			free_ptr(char **str);
+void			get_data(t_data *data);
+void			free_ptr(char **str);
+void			free_mat(char ***mat);
+void			close_fds(int min, int max);
+int 			get_map(t_data *data, char *line);
+void			get_format(char ***map, size_t height, size_t width);
+void			get_player_info(t_data *data);
+void			check_map(t_data *data);
 
-void init_textures(t_data *data);
-t_image init_texture(t_data *data, int flag);
 
-// t_image init_texture(t_data *data, int i);
-void	ft_exit(t_data *data, const char *str, int code);
-void	free_ptr(char **str);
-void	get_data(t_data *data);
-void	free_ptr(char **str);
-void	free_mat(char ***mat);
-void	close_fds(int min, int max);
-int 	get_map(t_data *data, char *line);
-void	get_format(char ***map, size_t height, size_t width);
-void	get_player_info(t_data *data);
-void	check_map(t_data *data);
-
-t_mlx    *mlx_initializer(void);
-void    draw2dmap(t_data *data);
-int 	render2dmap(t_data *data);
-int		keypressed(int keycode, t_data *data);
-void	my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
-void    playermovement(t_data *data);
-void    initplayer(t_data *data);
+t_mlx   		*mlx_initializer(void);
+void    		draw2dmap(t_data *data);
+int 			render2dmap(t_data *data);
+int				keypressed(int keycode, t_data *data);
+void			my_mlx_pixel_put(t_mlx *data, int x, int y, int color);
+void    		playermovement(t_data *data);
+void    		initplayer(t_data *data);
 unsigned int	my_mlx_pixel_get(t_image *img, int x, int y);
-int 	keyreleased(int keycode, t_data *data);
-void    cast_all_rays(t_data *data);
-void 	plotLine(t_data *cub3D, int x0, int y0, int x1, int y1, int color);
-void 	render_rays(t_data *data);
-float 	angles_normalizer(float angle);
-int     ray_direction(t_ray *ray);
-void cast_ray(t_ray *ray, t_data *data);
-void x_intersections(t_ray *ray, t_data *data);
-void y_intersections(t_ray *ray, t_data *data);
-// void 	y_intersections(t_ray *ray, t_player *player);
-void 	ver_hor_intersections(t_ray *ray, t_player *player);
-void 	ver_intersections(t_ray *ray, t_player *player);
-void 	hor_intersections(t_ray *ray, t_player *player);
-int 	has_wall_at(t_data *data, float x, float y);
-void 	distance_to_wall(t_ray *ray, t_data *data);
-int    get_texture_pixel_color(int x, int y, t_data *data, int n);
+int 			keyreleased(int keycode, t_data *data);
+void   			cast_all_rays(t_data *data);
+void 			plotLine(t_data *cub3D, int x0, int y0, int x1, int y1, int color);
+void 			render_rays(t_data *data);
+float 			angles_normalizer(float angle);
+int    			ray_direction(t_ray *ray);
+void			cast_ray(t_ray *ray, t_data *data);
+double 			distance_between_points(double x1, double y1, double x2, double y2);
+void    		distance_to_wall(t_ray *ray, t_data *data);
+void    		rays_parameters(t_data *data);
+void			calculate_horizontal_intercept(t_ray *ray, t_data *data);
+void			check_horizontal_intersections(t_ray *ray, t_data *data);
+void			calculate_vertical_intercept(t_ray *ray, t_data *data);
+void			check_vertical_intersections(t_ray *ray, t_data *data);
+int 			has_wall_at(t_data *data, float x, float y);
+void 			distance_to_wall(t_ray *ray, t_data *data);
+int				choose_texture(t_ray *ray, float ra);
+int    			get_texture_pixel_color(int x, int y, t_data *data, int n);
 
 
 
