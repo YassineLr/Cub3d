@@ -6,12 +6,12 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/17 04:00:48 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/18 22:39:30 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
-#define CUB3D_H
+# define CUB3D_H
 
 # include <unistd.h>
 # include <stdlib.h>
@@ -29,14 +29,14 @@
 # define TILE_SIZE 64
 # define A_KEY 97
 # define D_KEY 100
-# define W_KEY 119
-# define S_KEY 115
-# define KEYDOWN 65364
-# define KEYUP 65362
-# define RIGHT_ARROW 65363
-# define LEFT_ARROW 65361
-# define ESC 65307
-# define FOV 60*PI/180
+# define W_KEY 126
+# define S_KEY 125
+# define KEYDOWN 125
+# define KEYUP 126
+# define RIGHT_ARROW 124
+# define LEFT_ARROW 123
+# define ESC 53
+# define FOV 1.0471975512
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS WIN_WIDTH
 
