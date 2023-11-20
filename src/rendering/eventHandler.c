@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 01:46:28 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/11/20 22:13:20 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/20 23:03:07 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	keypressed(int keycode, t_data *data)
 {
-	printf("%d\n", keycode);
 	if (keycode == ESC)
 		exit(1);
 	else if (keycode == W_KEY)

@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 17:48:04 by yismaail          #+#    #+#             */
-/*   Updated: 2022/11/02 12:51:44 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/20 23:07:01 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	str[i] = '\0';
 	return (str);
 }
-
-// char tt_lower(unsigned int i, char s)
-// {
-// 	return (ft_tolower(s));
-// }
-// int main ()
-// {
-// 	printf("%s\n", tt("Ab", tt_lower));
-// }

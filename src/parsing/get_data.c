@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 06:56:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/20 22:04:16 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/20 22:59:56 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
+
+static void	free_all(char **tmp0, char **tmp1, char **tmp2)
+{
+	free_ptr(tmp0);
+	free_ptr(tmp1);
+	free_ptr(tmp2);
+}
 
 static int	get_color(int *color, char *line)
 {
@@ -36,9 +43,7 @@ static int	get_color(int *color, char *line)
 			c.ret = -1;
 	if (!c.temp[0] || !c.temp[1] || !c.temp[2])
 		c.ret = -1;
-	free_ptr (&c.temp[0]);
-	free_ptr (&c.temp[1]);
-	free_ptr (&c.temp[2]);
+	free_all(&c.temp[0], &c.temp[1], &c.temp[2]);
 	return (c.ret);
 }
 
@@ -55,13 +60,13 @@ static int	set_data(char *line, t_data *data)
 	while (line[i] && line[i] != '\n')
 		i++;
 	if (!ft_strncmp(line, "NO ", 3) && !s)
-		data->textures.no_texture = ft_strtrim(line , "NO \n\r");
+		data->textures.no_texture = ft_strtrim(line, "NO \n\r");
 	else if (!ft_strncmp(line, "SO ", 3) && !s)
-		data->textures.so_texture = ft_strtrim(line , "SO \n\r");
+		data->textures.so_texture = ft_strtrim(line, "SO \n\r");
 	else if (!ft_strncmp(line, "EA ", 3) && !s)
-		data->textures.ea_texture = ft_strtrim(line , "EA \n\r");
+		data->textures.ea_texture = ft_strtrim(line, "EA \n\r");
 	else if (!ft_strncmp(line, "WE ", 3) && !s)
-		data->textures.we_texture = ft_strtrim(line , "WE \n\r");
+		data->textures.we_texture = ft_strtrim(line, "WE \n\r");
 	else if (!ft_strncmp(line, "C ", 2) && !s)
 		color = get_color(&data->colors.celling, line);
 	else if (!ft_strncmp(line, "F ", 2) && !s)

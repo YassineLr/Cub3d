@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/06 23:02:17 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/20 00:59:34 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/20 23:03:49 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 
 typedef struct s_list
 {
-    void            *content;
-    struct  s_list  *next;
+	void			*content;
+	struct s_list	*next;
 }					t_list;
 
 int		ft_isalpha(int c);
@@ -60,10 +60,10 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char	*ft_strtrim(char const *s1, char const *set);
 int		ft_isspace(char *str);
 int		ft_isempty(char *str);
-void    ft_lstadd_back(t_list **lst, t_list *new);
-void    ft_lstadd_front(t_list **lst, t_list *new);
-t_list  *ft_lstlast(t_list *lst);
-t_list  *ft_lstnew(void *content);
+void	ft_lstadd_back(t_list **lst, t_list *new);
+void	ft_lstadd_front(t_list **lst, t_list *new);
+t_list	*ft_lstlast(t_list *lst);
+t_list	*ft_lstnew(void *content);
 int		ft_lstsize(t_list *lst);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*get_next_line(int fd);
