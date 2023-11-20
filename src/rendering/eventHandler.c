@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eventHandler.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 01:46:28 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/11/20 23:03:07 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/20 23:40:46 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 int	keypressed(int keycode, t_data *data)
 {
 	if (keycode == ESC)
+	{
+		mlx_destroy_window(data->mlx->mlx_ptr, data->mlx->win);
 		exit(1);
+	}
 	else if (keycode == W_KEY)
 		data->player.walkdirection = 1;
 	else if (keycode == S_KEY)
