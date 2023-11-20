@@ -6,13 +6,13 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 03:43:32 by yismaail          #+#    #+#             */
-/*   Updated: 2023/09/22 12:11:10 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/20 22:01:33 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-static void print_message(const char *str, int code)
+static void	print_message(const char *str, int code)
 {
 	if (code)
 		ft_putstr_fd("ERROR ", 2);

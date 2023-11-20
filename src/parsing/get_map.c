@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 23:28:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/10/04 10:20:19 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/20 22:02:48 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,10 +63,7 @@ void	get_player_info(t_data *data)
 		while (data->map[y] && data->map[y][x])
 		{
 			if (ft_strchr("NSEW", data->map[y][x]))
-			{
-				
 				get_direction(data, x, y);
-			}
 			x++;
 		}
 		y++;
@@ -97,7 +94,7 @@ void	get_format(char ***map, size_t height, size_t width)
 	map[0] = temp;
 }
 
-int get_map(t_data *data, char *line)
+int	get_map(t_data *data, char *line)
 {
 	char	**temp;
 	int		i;
