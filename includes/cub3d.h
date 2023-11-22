@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/20 23:02:03 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/22 05:51:57 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -189,5 +189,6 @@ int				has_wall_at(t_data *data, float x, float y);
 void			distance_to_wall(t_ray *ray, t_data *data);
 int				choose_texture(t_ray *ray, float ra);
 int				get_texture_pixel_color(int x, int y, t_data *data, int n);
+void 			check_nbr(t_get_color *c, int *i);
 
 #endif

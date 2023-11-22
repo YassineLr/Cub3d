@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 06:56:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/20 22:59:56 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/22 06:08:42 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,14 @@ static int	get_color(int *color, char *line)
 	c.len = ft_strchr (line + c.start, '\0') - line - c.start;
 	c.temp[2] = ft_substr (line, c.start, c.len);
 	*color |= ((unsigned char) ft_atoi (c.temp[2]));
-	if (!(ft_atoi(c.temp[0]) >= 0 && ft_atoi(c.temp[0]) <= 255)
-		|| !(ft_atoi(c.temp[1]) >= 0 && ft_atoi(c.temp[1]) <= 255)
-		|| !(ft_atoi(c.temp[2]) >= 0 && ft_atoi(c.temp[2]) <= 255))
-			c.ret = -1;
-	if (!c.temp[0] || !c.temp[1] || !c.temp[2])
-		c.ret = -1;
+	check_nbr(&c, &c.ret);
+	// if (!(ft_atoi(c.temp[0]) >= 0 && ft_atoi(c.temp[0]) <= 255)
+	// 	|| !(ft_atoi(c.temp[1]) >= 0 && ft_atoi(c.temp[1]) <= 255)
+	// 	|| !(ft_atoi(c.temp[2]) >= 0 && ft_atoi(c.temp[2]) <= 255))
+	// 		c.ret = -1;
+	// if (!c.temp[0] || !c.temp[1] || !c.temp[2])
+	// 	c.ret = -1;
+	printf("c.ret = %d\n", c.ret);
 	free_all(&c.temp[0], &c.temp[1], &c.temp[2]);
 	return (c.ret);
 }
@@ -95,6 +97,7 @@ void	get_data(t_data *data)
 	}
 	if (err < 2)
 	{
+	printf("err = %d\n", err);
 		while (line)
 		{
 			free_ptr(&line);

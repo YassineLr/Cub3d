@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 03:03:45 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/20 22:03:39 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/22 02:00:43 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ static void	init_data(t_data *data)
 	ft_bzero(&data->colors, sizeof(t_color));
 }
 
-void	init_textures(t_data *data)
-{
-	int	i;
+// void	init_textures(t_data *data)
+// {
+// 	int	i;
 
-	i = -1;
-	while (++i < 4)
-		data->textures.image[i] = init_texture(data, i);
-}
+// 	i = -1;
+// 	while (++i < 4)
+// 		data->textures.image[i] = init_texture(data, i);
+// }
 
 void	init_game(t_data *data, int ac, char **av)
 {
@@ -50,12 +50,12 @@ void	init_game(t_data *data, int ac, char **av)
 	check_args(ac, data);
 	get_file_name(av[1], data);
 	get_data(data);
-	get_format(&data->map, data->map_h, data->map_w);
-	data->map_w--;
-	get_player_info(data);
-	if (!data->map || !(int)data->player.x || !data->player.y)
-		ft_exit(data, "invalide information", 1);
-	check_map(data);
-	data->mlx = mlx_initializer();
-	init_textures(data);
+	// get_format(&data->map, data->map_h, data->map_w);
+	// data->map_w--;
+	// get_player_info(data);
+	// if (!data->map || !(int)data->player.x || !data->player.y)
+	// 	ft_exit(data, "invalide information", 1);
+	// check_map(data);
+	// data->mlx = mlx_initializer();
+	// init_textures(data);
 }

@@ -3,8 +3,8 @@ SO  ./texture/SO.xpm
 WE  ./texture/WE.xpm
 EA  ./texture/EA.xpm
 
-F 54,69,79
-C 145,200,228
+F 58,66,#9
+C 141,200,222
 
 11111111111111111111
 1N000100000000010001
