@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 08:04:12 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/20 22:01:12 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/23 10:40:51 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,68 @@ static void	check_characters(t_data *data, char **map)
 	}
 }
 
+static int isMapSplitByNewline(char **map) {
+    int i;
+	int	count;
+
+	i = 0;
+	count = 0;
+    while (map[i]) {
+		if (ft_isempty(map[i]) == 1)
+			count++;
+        i++;
+    }
+	if (count != 0)
+		return (1);
+    return (0);
+}
+
+static int	b_strchr(const char *s, int c)
+{
+	while (s && *s)
+	{
+		if (*s == (unsigned char)c)
+			return (1);
+		s++;
+	}
+	if (s && *s == (unsigned char)c)
+		return (1);
+	return (0);
+}
+
+static int	isDuplicate(char **map)
+{
+	int	i;
+	int flag;
+	int	j;
+	
+	i = 0;
+	flag = 0;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (b_strchr("NWES", map[i][j]))
+				flag++;
+			j++;	
+		}
+		i++;
+	}
+	if (flag > 1)
+		return (1);
+	return (0);
+}
+
+static void	final_check(t_data *data, char **map)
+{
+	if (isMapSplitByNewline(map) == 1)
+		ft_exit(data, "Invalid Map9.", 1);
+	if (isDuplicate(map) == 1)
+		ft_exit(data, "Invalide Map10.", 1);
+	
+}
+
 void	check_map(t_data *data)
 {
 	int	y;
@@ -111,4 +173,5 @@ void	check_map(t_data *data)
 			check_middle(data, data->map, y);
 		y++;
 	}
+	final_check(data, data->map);
 }

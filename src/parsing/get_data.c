@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 06:56:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/22 06:08:42 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/23 11:36:57 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	get_color(int *color, char *line)
 	*color |= ((unsigned char) ft_atoi (c.temp[1])) << 8;
 	c.start += c.len + 1;
 	c.len = ft_strchr (line + c.start, '\0') - line - c.start;
-	c.temp[2] = ft_substr (line, c.start, c.len);
+	c.temp[2] = ft_substr (line, c.start, c.len - 1);
 	*color |= ((unsigned char) ft_atoi (c.temp[2]));
 	check_nbr(&c, &c.ret);
 	// if (!(ft_atoi(c.temp[0]) >= 0 && ft_atoi(c.temp[0]) <= 255)
@@ -97,7 +97,6 @@ void	get_data(t_data *data)
 	}
 	if (err < 2)
 	{
-	printf("err = %d\n", err);
 		while (line)
 		{
 			free_ptr(&line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 03:43:32 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/20 22:01:33 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/23 12:11:35 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	print_message(const char *str, int code)
 {
 	if (code)
-		ft_putstr_fd("ERROR ", 2);
+		ft_putstr_fd("ERROR\n", 2);
 	if (str)
 		ft_putendl_fd((char *)str, 2);
 	if (!code && !str)
