@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 03:03:45 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/23 12:10:14 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/24 00:22:39 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ static void	init_data(t_data *data)
 // void	init_textures(t_data *data)
 // {
 // 	int	i;
-
+// 	data->textures.width = 64;
+// 	data->textures.height = 64;
 // 	i = -1;
 // 	while (++i < 4)
 // 		data->textures.image[i] = init_texture(data, i);
@@ -78,7 +79,6 @@ void	init_game(t_data *data, int ac, char **av)
 	check_args(ac, data);
 	get_file_name(av[1], data);
 	get_data(data);
-	
 	get_format(&data->map, data->map_h, data->map_w);
 	data->map_w--;
 	get_player_info(data);

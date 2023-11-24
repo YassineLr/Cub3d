@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/22 05:51:57 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/24 01:29:37 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@
 # define FOV 1.0471975512
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS WIN_WIDTH
+
+int F_COUNTER;
+int C_COUNTER;
+int NO_COUNTER;
+int WE_COUNTER;
+int SO_COUNTER;
+int EA_COUNTER;
 
 typedef struct s_wall_cordinate
 {

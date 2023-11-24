@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 06:56:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/23 11:36:57 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/24 00:30:18 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,6 @@ static int	set_data(char *line, t_data *data)
 
 	i = 0;
 	color = 0;
-	data->textures.width = 64;
-	data->textures.height = 64;
 	while (line[i] && line[i] != '\n')
 		i++;
 	if (!ft_strncmp(line, "NO ", 3) && !s)
