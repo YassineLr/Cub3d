@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 03:03:45 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/24 10:30:15 by mac              ###   ########.fr       */
+/*   Updated: 2023/11/24 22:39:46 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,15 @@ static void	init_data(t_data *data)
 	ft_bzero(&data->colors, sizeof(t_color));
 }
 
-// void	init_textures(t_data *data)
-// {
-// 	int	i;
-// 	data->textures.width = 64;
-// 	data->textures.height = 64;
-// 	i = -1;
-// 	while (++i < 4)
-// 		data->textures.image[i] = init_texture(data, i);
-// }
+void	init_textures(t_data *data)
+{
+	int	i;
+	data->textures.width = 64;
+	data->textures.height = 64;
+	i = -1;
+	while (++i < 4)
+		data->textures.image[i] = init_texture(data, i);
+}
 
 static void print_map(char **map)
 {
@@ -106,12 +106,12 @@ void	init_game(t_data *data, int ac, char **av)
 		ft_exit(data, "invalioode information", 1);
 	if (C_COUNTER != 1 || F_COUNTER != 1 || NO_COUNTER != 1 || SO_COUNTER != 1 || WE_COUNTER != 1 || EA_COUNTER != 1)
 	{
-		printf("NO = %d\n SO = %d\n WE = %d\n EA = %d\n C = %d\n f = %d\n MAP = %d\n",
-					NO_COUNTER, SO_COUNTER, WE_COUNTER, EA_COUNTER, C_COUNTER, F_COUNTER, MAP_COUNTER);
+		// printf("NO = %d\n SO = %d\n WE = %d\n EA = %d\n C = %d\n f = %d\n MAP = %d\n",
+		// 			NO_COUNTER, SO_COUNTER, WE_COUNTER, EA_COUNTER, C_COUNTER, F_COUNTER, MAP_COUNTER);
 		ft_exit(data, "Something missing", 1);
 	}
 	print_data(data);
 	check_map(data);
-	// data->mlx = mlx_initializer();
-	// init_textures(data);
+	data->mlx = mlx_initializer();
+	init_textures(data);
 }

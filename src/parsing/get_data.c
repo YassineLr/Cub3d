@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 06:56:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/24 10:23:59 by mac              ###   ########.fr       */
+/*   Updated: 2023/11/24 22:41:16 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,6 @@ static int	get_color(int *color, char *line)
 	c.temp[2] = ft_substr (line, c.start, c.len - 1);
 	*color |= ((unsigned char) ft_atoi (c.temp[2]));
 	check_nbr(&c, &c.ret);
-	// if (!(ft_atoi(c.temp[0]) >= 0 && ft_atoi(c.temp[0]) <= 255)
-	// 	|| !(ft_atoi(c.temp[1]) >= 0 && ft_atoi(c.temp[1]) <= 255)
-	// 	|| !(ft_atoi(c.temp[2]) >= 0 && ft_atoi(c.temp[2]) <= 255))
-	// 		c.ret = -1;
-	// if (!c.temp[0] || !c.temp[1] || !c.temp[2])
-	// 	c.ret = -1;
-	printf("c.ret = %d\n", c.ret);
 	free_all(&c.temp[0], &c.temp[1], &c.temp[2]);
 	return (c.ret);
 }
@@ -65,7 +58,6 @@ static void	check_element(t_data *data, char *line)
 		F_COUNTER++;
 	else if (ft_strchr("NWES10", line[0]) || MAP_COUNTER)
 		MAP_COUNTER++;
-		// s = get_map(data, line);
 		
 }
 
