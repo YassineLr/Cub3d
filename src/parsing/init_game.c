@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_game.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 03:03:45 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/24 00:22:39 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/24 10:30:15 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,20 @@ static void print_data(t_data *data) {
     // This will depend on what type mlx is and what information you want to print
 }
 
+static void	init_g()
+{
+	F_COUNTER = 0;
+	C_COUNTER = 0;
+	NO_COUNTER = 0;
+	WE_COUNTER = 0;
+	SO_COUNTER = 0;
+	EA_COUNTER = 0;
+	MAP_COUNTER = 0;
+}
+
 void	init_game(t_data *data, int ac, char **av)
 {
+	init_g();
 	init_data(data);
 	check_args(ac, data);
 	get_file_name(av[1], data);
@@ -92,6 +104,12 @@ void	init_game(t_data *data, int ac, char **av)
 		|| !data->textures.no_texture || !data->textures.so_texture
 		|| !data->textures.ea_texture || !data->textures.we_texture)
 		ft_exit(data, "invalioode information", 1);
+	if (C_COUNTER != 1 || F_COUNTER != 1 || NO_COUNTER != 1 || SO_COUNTER != 1 || WE_COUNTER != 1 || EA_COUNTER != 1)
+	{
+		printf("NO = %d\n SO = %d\n WE = %d\n EA = %d\n C = %d\n f = %d\n MAP = %d\n",
+					NO_COUNTER, SO_COUNTER, WE_COUNTER, EA_COUNTER, C_COUNTER, F_COUNTER, MAP_COUNTER);
+		ft_exit(data, "Something missing", 1);
+	}
 	print_data(data);
 	check_map(data);
 	// data->mlx = mlx_initializer();

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/24 01:29:37 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/24 10:21:13 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <math.h>
 # include "../libft/libft.h"
 # include <stdbool.h>
-# include <mlx.h>
+// # include <mlx.h>
 
 # define WIN_NAME "Cub3d"
 # define WIN_WIDTH 1080
@@ -46,6 +46,7 @@ int NO_COUNTER;
 int WE_COUNTER;
 int SO_COUNTER;
 int EA_COUNTER;
+int MAP_COUNTER;
 
 typedef struct s_wall_cordinate
 {

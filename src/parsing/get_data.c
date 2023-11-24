@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 06:56:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/24 00:30:18 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/24 10:23:59 by mac              ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,26 @@ static int	get_color(int *color, char *line)
 	return (c.ret);
 }
 
+static void	check_element(t_data *data, char *line)
+{
+	if (!ft_strncmp(line, "NO ", 3) && !MAP_COUNTER)
+		NO_COUNTER++;
+	else if (!ft_strncmp(line, "SO ", 3) && !MAP_COUNTER)
+		SO_COUNTER++;
+	else if (!ft_strncmp(line, "EA ", 3) && !MAP_COUNTER)
+		EA_COUNTER++;
+	else if (!ft_strncmp(line, "WE ", 3) && !MAP_COUNTER)
+		WE_COUNTER++;
+	else if (!ft_strncmp(line, "C ", 2) && !MAP_COUNTER)
+		C_COUNTER++;
+	else if (!ft_strncmp(line, "F ", 2) && !MAP_COUNTER)
+		F_COUNTER++;
+	else if (ft_strchr("NWES10", line[0]) || MAP_COUNTER)
+		MAP_COUNTER++;
+		// s = get_map(data, line);
+		
+}
+
 static int	set_data(char *line, t_data *data)
 {
 	static int	s;
@@ -59,6 +79,7 @@ static int	set_data(char *line, t_data *data)
 	color = 0;
 	while (line[i] && line[i] != '\n')
 		i++;
+	check_element(data, line);
 	if (!ft_strncmp(line, "NO ", 3) && !s)
 		data->textures.no_texture = ft_strtrim(line, "NO \n\r");
 	else if (!ft_strncmp(line, "SO ", 3) && !s)
