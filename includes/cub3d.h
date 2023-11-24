@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mac <mac@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/24 10:21:13 by mac              ###   ########.fr       */
+/*   Updated: 2023/11/24 23:07:50 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <math.h>
 # include "../libft/libft.h"
 # include <stdbool.h>
-// # include <mlx.h>
+# include <mlx.h>
 
 # define WIN_NAME "Cub3d"
 # define WIN_WIDTH 1080
@@ -47,6 +47,7 @@ int WE_COUNTER;
 int SO_COUNTER;
 int EA_COUNTER;
 int MAP_COUNTER;
+
 
 typedef struct s_wall_cordinate
 {
@@ -173,6 +174,8 @@ int				get_map(t_data *data, char *line);
 void			get_format(char ***map, size_t height, size_t width);
 void			get_player_info(t_data *data);
 void			check_map(t_data *data);
+void check_nbr(t_get_color *c, int *i);
+int isOnlyDigits(char *str);
 
 t_mlx			*mlx_initializer(void);
 int				render2dmap(t_data *data);
@@ -197,6 +200,5 @@ int				has_wall_at(t_data *data, float x, float y);
 void			distance_to_wall(t_ray *ray, t_data *data);
 int				choose_texture(t_ray *ray, float ra);
 int				get_texture_pixel_color(int x, int y, t_data *data, int n);
-void 			check_nbr(t_get_color *c, int *i);
 
 #endif

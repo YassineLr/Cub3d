@@ -1,15 +1,11 @@
-NO  ./texture/1.xpm  
-SO  ./texture/2.xpm
-WE  ./texture/3.xpm
-WE  ./texture/4.xpm
+NO  ./texture/NO.xpm  
+SO  ./texture/SO.xpm
+WE  ./texture/WE.xpm
+EA  ./texture/EA.xpm
 
-F 58,66,11
-C 8,6,1
+F 54,69,79
+C 145,200,228
 
-
-1111111
-10W0001
-1000001
-1000001
-1111111
-1   111111
+111
+1W1
+111

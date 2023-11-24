@@ -6,7 +6,7 @@
 /*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/20 05:29:24 by ylarhris          #+#    #+#             */
-/*   Updated: 2023/11/18 21:56:41 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:10:05 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	initplayer(t_data *data)
 	data->player.turndirection = 0;
 	data->player.walkdirection = 0;
 	data->player.straff_direction = 0;
-	data->player.movespeed = 3.5;
-	data->player.rotationspeed = 2.5 * (PI / 180);
+	data->player.movespeed = 4.5;
+	data->player.rotationspeed = 3.5 * (PI / 180);
 	data->player.to_do = 0;
 }

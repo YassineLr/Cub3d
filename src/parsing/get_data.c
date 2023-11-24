@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 06:56:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/24 22:41:16 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/24 23:04:58 by ylarhris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static int	get_color(int *color, char *line)
 	return (c.ret);
 }
 
-static void	check_element(t_data *data, char *line)
+static void	check_element( char *line)
 {
 	if (!ft_strncmp(line, "NO ", 3) && !MAP_COUNTER)
 		NO_COUNTER++;
@@ -71,7 +71,7 @@ static int	set_data(char *line, t_data *data)
 	color = 0;
 	while (line[i] && line[i] != '\n')
 		i++;
-	check_element(data, line);
+	check_element(line);
 	if (!ft_strncmp(line, "NO ", 3) && !s)
 		data->textures.no_texture = ft_strtrim(line, "NO \n\r");
 	else if (!ft_strncmp(line, "SO ", 3) && !s)
