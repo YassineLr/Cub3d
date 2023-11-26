@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/17 01:20:23 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/24 23:07:50 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/26 00:23:47 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,6 @@
 # define FOV 1.0471975512
 # define WALL_STRIP_WIDTH 1
 # define NUM_RAYS WIN_WIDTH
-
-int F_COUNTER;
-int C_COUNTER;
-int NO_COUNTER;
-int WE_COUNTER;
-int SO_COUNTER;
-int EA_COUNTER;
-int MAP_COUNTER;
-
 
 typedef struct s_wall_cordinate
 {
@@ -149,6 +140,13 @@ typedef struct s_data
 	char		**map;
 	int			map_h;
 	int			map_w;
+	int			f_counter;
+	int			c_counter;
+	int			no_counter;
+	int			we_counter;
+	int			so_counter;
+	int			ea_counter;
+	int			map_counter;
 	t_texture	textures;
 	t_color		colors;
 	t_player	player;
@@ -174,8 +172,10 @@ int				get_map(t_data *data, char *line);
 void			get_format(char ***map, size_t height, size_t width);
 void			get_player_info(t_data *data);
 void			check_map(t_data *data);
-void check_nbr(t_get_color *c, int *i);
-int isOnlyDigits(char *str);
+void			check_nbr(t_get_color *c, int *i);
+void			final_check(t_data *data, char **map);
+// void			init_g(void);
+void			check_plus(t_data *data);
 
 t_mlx			*mlx_initializer(void);
 int				render2dmap(t_data *data);

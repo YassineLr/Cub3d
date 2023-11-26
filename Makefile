@@ -3,18 +3,18 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+         #
+#    By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/26 15:19:11 by yismaail          #+#    #+#              #
-#    Updated: 2023/11/24 23:25:51 by ylarhris         ###   ########.fr        #
+#    Updated: 2023/11/26 00:33:14 by yismaail         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	cub3d
-CC			=	cc
-CFLAGS		=	-Imlx_linux -Werror -Wextra -Wall
+CC			=	cc 
+CFLAGS		=	-Imlx_linux -Werror -Wextra -Wall -fsanitize=address -g3
 RM			=	rm -rf
-SRCS		=	main.c src/parsing/init_game.c src/parsing/get_data.c src/parsing/exit.c src/parsing/get_map.c src/parsing/check_map.c src/parsing/utils.c src/parsing/init_texture.c\
+SRCS		=	main.c src/parsing/init_game.c src/parsing/get_data.c src/parsing/exit.c src/parsing/get_map.c src/parsing/check_map.c src/parsing/utils.c src/parsing/init_texture.c src/parsing/banana.c \
 				src/rendering/initializer.c src/rendering/render2dmap.c src/rendering/eventHandler.c src/rendering/mlx_helpers.c src/rendering/anglesnormalizer.c \
 				./src/raycasting/raysparams.c ./src/raycasting/raycaster.c ./src/raycasting/textures.c ./src/raycasting/cast_all_rays.c
 OBJS		= ${SRCS:.c=.o}

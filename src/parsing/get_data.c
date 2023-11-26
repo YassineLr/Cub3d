@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylarhris <ylarhris@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 06:56:08 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/24 23:04:58 by ylarhris         ###   ########.fr       */
+/*   Updated: 2023/11/26 02:06:35 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,22 @@ static int	get_color(int *color, char *line)
 	return (c.ret);
 }
 
-static void	check_element( char *line)
+static void	check_element( char *line, t_data *data)
 {
-	if (!ft_strncmp(line, "NO ", 3) && !MAP_COUNTER)
-		NO_COUNTER++;
-	else if (!ft_strncmp(line, "SO ", 3) && !MAP_COUNTER)
-		SO_COUNTER++;
-	else if (!ft_strncmp(line, "EA ", 3) && !MAP_COUNTER)
-		EA_COUNTER++;
-	else if (!ft_strncmp(line, "WE ", 3) && !MAP_COUNTER)
-		WE_COUNTER++;
-	else if (!ft_strncmp(line, "C ", 2) && !MAP_COUNTER)
-		C_COUNTER++;
-	else if (!ft_strncmp(line, "F ", 2) && !MAP_COUNTER)
-		F_COUNTER++;
-	else if (ft_strchr("NWES10", line[0]) || MAP_COUNTER)
-		MAP_COUNTER++;
-		
+	if (!ft_strncmp(line, "NO ", 3) && !data->map_counter)
+		data->no_counter++;
+	else if (!ft_strncmp(line, "SO ", 3) && !data->map_counter)
+		data->so_counter++;
+	else if (!ft_strncmp(line, "EA ", 3) && !data->map_counter)
+		data->ea_counter++;
+	else if (!ft_strncmp(line, "WE ", 3) && !data->map_counter)
+		data->we_counter++;
+	else if (!ft_strncmp(line, "C ", 2) && !data->map_counter)
+		data->c_counter++;
+	else if (!ft_strncmp(line, "F ", 2) && !data->map_counter)
+		data->f_counter++;
+	else if (ft_strchr("NWES10", line[0]) || data->map_counter)
+		data->map_counter++;
 }
 
 static int	set_data(char *line, t_data *data)
@@ -71,7 +70,7 @@ static int	set_data(char *line, t_data *data)
 	color = 0;
 	while (line[i] && line[i] != '\n')
 		i++;
-	check_element(line);
+	check_element(line, data);
 	if (!ft_strncmp(line, "NO ", 3) && !s)
 		data->textures.no_texture = ft_strtrim(line, "NO \n\r");
 	else if (!ft_strncmp(line, "SO ", 3) && !s)
