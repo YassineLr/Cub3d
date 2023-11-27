@@ -6,7 +6,7 @@
 /*   By: yismaail <yismaail@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/22 08:04:12 by yismaail          #+#    #+#             */
-/*   Updated: 2023/11/25 01:27:31 by yismaail         ###   ########.fr       */
+/*   Updated: 2023/11/27 01:25:28 by yismaail         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,18 @@ static void	check_border(t_data *data, char **map, int y)
 	while (x < data->map_w)
 	{
 		if (map[y][x] != ' ' && map[y][x] != '1')
-			ft_exit(data, "Invalid Map1.", 7);
+		{
+			ft_exit(data, "Invalid Map1.", 1);
+		}
 		if (y == 0 && map[y][x] == ' ')
 		{
 			if (map[1][x] != ' ' && map[1][x] != '1')
-				ft_exit(data, "Invalid Map2.", 8);
+				ft_exit(data, "Invalid Map2.", 1);
 		}
 		else if (y == data->map_h - 1 && map[y][x] == ' ')
 		{
 			if (map[y - 1][x] != ' ' && map[y - 1][x] != '1')
-				ft_exit(data, "Invalid Map3.", 9);
+				ft_exit(data, "Invalid Map3.", 1);
 		}
 		x++;
 	}
@@ -42,14 +44,14 @@ static void	check_arround_middle(t_data *data, int y, int x, char **map)
 		if ((map[y][x + 1] != ' ' && map[y][x + 1] != '1') || \
 		(map[y - 1][x] != ' ' && map[y - 1][x] != '1') || \
 		(map[y + 1][x] != ' ' && map[y + 1][x] != '1'))
-			ft_exit(data, "Invalid Map4.", 4);
+			ft_exit(data, "Invalid Map4.", 1);
 	}
 	else if (x == data->map_w - 1 && map[y][x] == ' ')
 	{
 		if (((map[y][x - 1] != ' ' && map[y][x - 1] != '1') || \
 		(map[y - 1][x] != ' ' && map[y - 1][x] != '1') || \
 		(map[y + 1][x] != ' ' && map[y + 1][x] != '1')))
-			ft_exit (data, "Invalid Map5.", 5);
+			ft_exit (data, "Invalid Map5.", 1);
 	}
 	else if (map[y][x] == ' ')
 	{
@@ -57,7 +59,7 @@ static void	check_arround_middle(t_data *data, int y, int x, char **map)
 		(map[y][x + 1] != ' ' && map[y][x + 1] != '1') || \
 		(map[y - 1][x] != ' ' && map[y - 1][x] != '1') || \
 		(map[y + 1][x] != ' ' && map[y + 1][x] != '1')))
-			ft_exit(data, "Invalid Map6.", 6);
+			ft_exit(data, "Invalid Map6.", 1);
 	}
 }
 
@@ -70,8 +72,9 @@ static void	check_middle(t_data *data, char **map, int y)
 	{
 		if (x == 0 || x == data->map_w - 1)
 		{
+			// printf("y = |%s|\n", data->map[y]);
 			if (map[y][x] != ' ' && map[y][x] != '1')
-				ft_exit(data, "Invalid Map7.", 3);
+				ft_exit(data, "Invalid Map7.", 1);
 		}
 		check_arround_middle(data, y, x, map);
 		x++;
@@ -105,8 +108,12 @@ void	check_map(t_data *data)
 	check_characters(data, data->map);
 	while (data->map[y])
 	{
+		
 		if (y == 0 || y == data->map_h - 1)
+		{
+			// printf("y = |%s|\n", data->map[y]);
 			check_border(data, data->map, y);
+		}
 		else
 			check_middle(data, data->map, y);
 		y++;
